@@ -16,7 +16,6 @@ public class Main {
         int maxRow = Integer.MIN_VALUE;
         int minCol = Integer.MAX_VALUE;
         int maxCol = Integer.MIN_VALUE;
-
         /*
          * 更新该点最大最小横坐标
          * @create 2024/3/9 23:11
