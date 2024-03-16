@@ -29,7 +29,6 @@ public class Main {
         // 读入数据
         String s = sc.next();
         System.out.println(getMaxString(s));
-
     }
 
     /**
