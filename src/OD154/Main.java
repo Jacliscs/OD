@@ -34,6 +34,7 @@ public class Main {
         System.out.println(solution(s, n));
     }
 
+
     //将字符串按k长度分隔，中间添加"-"，并转换大小写
     public static String solution(String s, int k) {
         String[] strs = s.split("-");
