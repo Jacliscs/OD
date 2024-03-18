@@ -33,7 +33,7 @@ import java.util.regex.Pattern;
  * 表达式值
  */
 // 注意类名必须为 Main, 不要有任何 package xxx 信息
-public class simple {
+public class Simple {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
