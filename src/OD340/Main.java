@@ -39,6 +39,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
         System.out.println(getMaxMath(str));
+
     }
 
     //提取字符串中最长合法表达式并计算值(只包含两个操作数的，且第一个数带正负号)，如有多个长度一样，则返回第一个
@@ -47,6 +48,8 @@ public class Main {
         int n = chars.length;
         //创建正则 匹配 (带正负号0个或1个) 数字1个或多个，然后是 + - * 必须1个 ，然后是 (不带正负号的数字)1个或多个
         Pattern pattern = Pattern.compile("^([+-]?\\d+)([+*-]{1}\\d+)$");
+        //如果匹配不只两个操作数
+
         int max = 0;
         long sum = 0;
         for (int i = 0; i < n; i++) {

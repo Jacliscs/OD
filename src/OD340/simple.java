@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
  * @date 2024/3/18
  * @level 7
  * @score 100
+ * @type 双指针、正则表达式、栈
  */
 
 /**
