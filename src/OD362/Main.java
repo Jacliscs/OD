@@ -6,6 +6,7 @@ import java.util.*;
  * @author Jacliscs
  * @description 智能成绩表
  * @date 2024/3/16
+ * @level 5
  */
 
 /**

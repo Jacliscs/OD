@@ -7,6 +7,7 @@ import java.util.Scanner;
  * @author Jacliscs
  * @description 字符串变换最小字符串
  * @date 2024/3/17
+ * @level 6
  */
 
 /**

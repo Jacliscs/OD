@@ -1,14 +1,13 @@
 package OD352;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 /**
  * @author Jacliscs
  * @description 开源项目热度榜单
  * @date 2024/3/18
+ * @level 3
  */
 
 /**

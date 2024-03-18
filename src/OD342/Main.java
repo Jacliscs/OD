@@ -6,6 +6,7 @@ import java.util.Scanner;
  * @author Jacliscs
  * @description 最富裕的小家庭
  * @date 2024/3/16
+ * @level 6
  */
 
 /**

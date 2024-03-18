@@ -8,6 +8,7 @@ import java.util.Scanner;
  * @author Jacliscs
  * @description 整形数组按个位值排序
  * @date 2024/3/18
+ * @level 2
  */
 
 /**

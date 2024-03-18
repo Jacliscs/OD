@@ -7,6 +7,7 @@ import java.util.Scanner;
  * @author Jacliscs
  * @description 转盘寿司
  * @date 2024/3/16
+ * @level 5
  */
 
 /**

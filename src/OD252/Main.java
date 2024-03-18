@@ -6,6 +6,7 @@ import java.util.Scanner;
  * @author Jacliscs
  * @description 拼接URL
  * @date 2024/3/17
+ * @level 6
  */
 
 /**

@@ -6,6 +6,7 @@ import java.util.Scanner;
  * @author Jacliscs
  * @description API集群负载统计
  * @date 2024/3/17
+ * @level 3
  */
 
 /**

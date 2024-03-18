@@ -6,6 +6,7 @@ import java.util.*;
  * @author Jacliscs
  * @description 数组去重和排序
  * @date 2024/3/17
+ * @level 6
  */
 
 /**

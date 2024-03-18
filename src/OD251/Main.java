@@ -9,6 +9,7 @@ import java.util.StringJoiner;
  * @author Jacliscs
  * @description 连续字母长度
  * @date 2024/3/17
+ * @level 6
  */
 
 /**

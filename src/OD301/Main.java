@@ -6,6 +6,7 @@ import java.util.*;
  * @author Jacliscs
  * @description 按身高和体重排队
  * @date 2024/3/17
+ * @level 6
  */
 
 /**
