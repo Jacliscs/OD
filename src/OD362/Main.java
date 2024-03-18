@@ -7,6 +7,7 @@ import java.util.*;
  * @description 智能成绩表
  * @date 2024/3/16
  * @level 5
+ * @type 动态条件排序、多条件排序
  */
 
 /**

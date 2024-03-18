@@ -7,6 +7,7 @@ import java.util.Scanner;
  * @description 最长子字符串的长度（一）
  * @date 2024/3/16
  * @level 6
+ * @type 逻辑分析
  */
 
 /**

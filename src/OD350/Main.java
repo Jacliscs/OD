@@ -8,17 +8,18 @@ import java.util.Scanner;
  * @description 分配土地
  * @date 2024/3/9
  * @level 3
+ * @type 逻辑分析
  */
 // 注意类名必须为 Main, 不要有任何 package xxx 信息
 public class Main {
-    //静态类，记录每个点最小最大坐标
+    //静态类，记录每个数字的最小最大坐标
     static class Rect {
         int minRow = Integer.MAX_VALUE;
         int maxRow = Integer.MIN_VALUE;
         int minCol = Integer.MAX_VALUE;
         int maxCol = Integer.MIN_VALUE;
         /*
-         * 更新该点最大最小横坐标
+         * 更新该数字最大最小横坐标
          * @create 2024/3/9 23:11
          * @param row
          * @return void
@@ -29,7 +30,7 @@ public class Main {
         }
 
         /*
-         * 更新该点最大最小纵坐标
+         * 更新该数字的最大最小纵坐标
          * @create 2024/3/9 23:12
          * @param col
          * @return void
@@ -62,8 +63,9 @@ public class Main {
             int maxArea = 0;
             //遍历
             for (int num : map.keySet()){
-                Rect rect = map.get(num);
-                maxArea = Math.max(maxArea,(rect.maxRow-rect.minRow+1)*(rect.maxCol-rect.minCol+1));
+                //Rect rect = map.get(num);
+                //maxArea = Math.max(maxArea,(rect.maxRow-rect.minRow+1)*(rect.maxCol-rect.minCol+1));
+                maxArea = Math.max(maxArea, (map.get(num).maxRow - map.get(num).minRow + 1) * (map.get(num).maxCol - map.get(num).minCol + 1));
             }
             System.out.println(maxArea);
         }

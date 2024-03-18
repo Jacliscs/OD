@@ -7,6 +7,7 @@ import java.util.Scanner;
  * @description 找座位
  * @date 2024/3/16
  * @level 6
+ * @type 逻辑分析
  */
 
 /**

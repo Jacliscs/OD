@@ -8,6 +8,7 @@ import java.util.Scanner;
  * @description 开源项目热度榜单
  * @date 2024/3/18
  * @level 3
+ * @type 多条件排序
  */
 
 /**

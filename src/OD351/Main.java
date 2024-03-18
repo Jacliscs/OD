@@ -8,6 +8,7 @@ import java.util.Scanner;
  * @description 转盘寿司
  * @date 2024/3/16
  * @level 5
+ * @type 数据结构、栈、单调栈
  */
 
 /**

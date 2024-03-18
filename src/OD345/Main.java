@@ -7,6 +7,7 @@ import java.util.Scanner;
  * @description 密码输入检测
  * @date 2024/3/16
  * @level 6
+ * @type 数据结构、栈
  */
 
 /**
