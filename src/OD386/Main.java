@@ -9,7 +9,7 @@ import java.util.Scanner;
  * @description 文本统计分析
  * @date 2024/3/19
  * @level 7
- * @score 100
+ * @score 200
  */
 
 
