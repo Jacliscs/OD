@@ -61,6 +61,12 @@ public class Main {
      * @create 2024/3/20 13:52
      */
     public static void getResult(int index, int min, int max, int remain) {
+        //如果只有一个人，就只有一种分法
+        if (m == 1) {
+            ans = 1;
+            return;
+        }
+
         //结束递归条件：最后一个分的月饼与上一个分的月饼相差小于3 因为去重控制，每一个员工的min值就是上一个员工分的月饼数量
         if (index == m - 1) {
             if (remain - min <= maxDiff) {
