@@ -9,7 +9,6 @@ import java.util.Scanner;
  * @level 4
  * @score 100
  */
-
 /**
  * 题目描述
  * 定义构造三叉搜索树规则如下：
