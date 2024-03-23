@@ -1,6 +1,7 @@
 package OD355;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 
 /**
@@ -47,27 +48,32 @@ public class Main {
     //找到小明应该站的位置 序列从1开始
     public static int getResult(int[] arr, int n) {
         //二分法，从中间开始站
-        int left = 0;
-        int right = arr.length - 1;
-        int index = 0;
-        //如果第一位大于n，则小明排第一个
-        if (arr[0] > n) {
-            return 1;
+        int index = Arrays.binarySearch(arr, n);
+        if (index < 0) {
+            index = -index - 1;
         }
-
-        while (right - left > 1) {
-            int mid = (left + right) / 2;
-            if (arr[mid] < n) {
-                left = mid;
-            } else if (arr[mid] > n) {
-                right = mid;
-            } else {
-                //arr[mid] = n
-                index = mid;
-            }
-        }
-        //最后n应该添加到left的左边或right的右边
-        index = left + 2;
-        return index;
+        return index + 1;
+        //int left = 0;
+        //int right = arr.length - 1;
+        //int index = 0;
+        ////如果第一位大于n，则小明排第一个
+        //if (arr[0] > n) {
+        //    return 1;
+        //}
+        //
+        //while (right - left > 1) {
+        //    int mid = (left + right) / 2;
+        //    if (arr[mid] < n) {
+        //        left = mid;
+        //    } else if (arr[mid] > n) {
+        //        right = mid;
+        //    } else {
+        //        //arr[mid] = n
+        //        index = mid;
+        //    }
+        //}
+        ////最后n应该添加到left的左边或right的右边
+        //index = left + 2;
+        //return index;
     }
 }
