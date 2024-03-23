@@ -61,7 +61,7 @@ public class Main {
             for (int brick : bricks) {
                 cost += brick / mid + (brick % mid > 0 ? 1 : 0);
             }
-            //如果花费小于8小时，则说明当前mid可以满足，但不一定是最优解
+            //如果花费<=8小时，则说明当前mid可以满足，但不一定是最优解
             if (cost <= 8) {
                 ans = Math.min(ans, mid);
                 max = mid - 1;
