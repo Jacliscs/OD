@@ -67,7 +67,6 @@ public class Main {
             int z = weight.removeLast();
             int y = weight.removeLast();
             int x = weight.removeLast();
-
             //取出差值
             // 如果 x == y == z，那么下面公式结果：remain=0, 表示三块银饰完全融掉
             // 如果 x == y && y != z，那么下面公式结果：remain = z - y
