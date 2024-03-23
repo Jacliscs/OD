@@ -11,7 +11,6 @@ import java.util.Scanner;
  * @score 100
  * @type 二分法
  */
-
 /**
  * 题目描述
  * 机器人搬砖，一共有 N 堆砖存放在 N 个不同的仓库中，第 i 堆砖中有 bricks[i] 块砖头，要求在 8 小时内搬完。
