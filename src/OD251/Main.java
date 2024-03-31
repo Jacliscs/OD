@@ -10,6 +10,8 @@ import java.util.StringJoiner;
  * @description 连续字母长度
  * @date 2024/3/17
  * @level 6
+ * @score 100
+ * @url https://hydro.ac/d/HWOD2023/p/OD251
  */
 
 /**
@@ -32,41 +34,48 @@ public class Main {
         String str = sc.nextLine();
         //读取第k长的字符
         int k = Integer.parseInt(sc.nextLine());
-        System.out.println(getKth(str, k));
+        System.out.println(getResult(str, k));
+
     }
 
-    //输出连续出现次数第k多的字母的次数
-    public static int getKth(String str, int k) {
-        if (str == null || str.isEmpty() || k < 1) {
-            return -1;
-        }
-        //找到每个字母的连续值，并降序排列
-        Map<Character, Integer> map = new HashMap<>();
-        char[] chars = str.toCharArray();
-        for (int i = 0; i < chars.length; i++) {
-            char c = chars[i];
-            //默认出现1次
-            int count = 1;
-            for (int j = i + 1; j < chars.length; j++) {
-                if (chars[j] == c) {
-                    count++;
-                } else {
-                    break;
+    public static int getResult(String s, int k) {
+        //异常处理
+        if (k <= 0) return -1;
+
+        //给s末尾拼接一个0，方便后续比较前后字符是否相同，存入最后一个字符的状态
+        s += "0";
+
+        //找出连续字母的最大长度
+        char[] chs = s.toCharArray();
+
+        //存放不同字符的最大长度
+        HashMap<Character, Integer> map = new HashMap<>();
+
+        //初始状态 上一字符及该字符对应的最大长度
+        char pre = chs[0];
+        int len = 1;
+
+        for (int i = 1; i < chs.length; i++) {
+            //当前字符
+            char cur = chs[i];
+            if (cur == pre) {
+                len++;
+            } else {
+                //如果当前字符跟上一个不相等，则判断map中是否不存在、或已存在但长度不是最长
+                if (!map.containsKey(pre) || map.containsKey(pre) && len > map.get(pre)) {
+                    map.put(pre, len);
                 }
-            }
-            //如果当前没有该字母或该字母出现的次数小于当前字母出现的次数，则更新
-            if (!map.containsKey(c) || map.get(c) < count) {
-                map.put(c, count);
+                //刷新状态
+                pre = cur;
+                len = 1;
             }
         }
-        //map里存放的key是字母，value是连续出现的次数，按出现次数从大到小排序
-        StringJoiner sj = new StringJoiner(",");
-        map.values().stream().sorted((a, b) -> b - a).forEach(s -> sj.add(String.valueOf(s)));
-        String[] strings = sj.toString().split(",");
-        if (k > strings.length) {
-            return -1;
-        } else {
-            return Integer.parseInt(strings[k - 1]);
-        }
+
+        //只需要用到字符出现的次数排序 降序
+        Integer[] arr = map.values().stream().sorted((a, b) -> b - a).toArray(Integer[]::new);
+
+        //无效输出
+        if (k > arr.length) return -1;
+        else return arr[k - 1];
     }
 }
