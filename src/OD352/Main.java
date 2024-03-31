@@ -9,6 +9,8 @@ import java.util.Scanner;
  * @date 2024/3/18
  * @level 3
  * @type 多条件排序
+ * @score 100
+ * @url https://hydro.ac/d/HWOD2023/p/OD352
  */
 
 /**
@@ -39,45 +41,47 @@ import java.util.Scanner;
  */
 // 注意类名必须为 Main, 不要有任何 package xxx 信息
 public class Main {
+    //自定义类 项目名 总热度
+    static class Project {
+        String name;
+        int hot;
+
+        public Project(String name, int hot) {
+            this.name = name;
+            this.hot = hot;
+        }
+    }
+
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         //开源项目个数
         int n = Integer.parseInt(sc.nextLine());
         //权重值列表 大小固定为5
-        int[] weight = new int[5];
-        String[] tempWeight = sc.nextLine().split(" ");
-        for (int i = 0; i < 5; i++) {
-            weight[i] = Integer.parseInt(tempWeight[i]);
-        }
-        //存放统计维度  第一项名称，最后一项是总分
-        String[][] statistic = new String[n][7];
+        int[] weights = Arrays.stream(sc.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+
+        Project[] projects = new Project[n];
+
+        //项目名 和各项分 最后统计总分
         for (int i = 0; i < n; i++) {
-            String[] temp = sc.nextLine().split(" ");
-            //放维度与总维度
-            int sum = 0;
-            //存名字
-            statistic[i][0] = temp[0];
-            for (int j = 1; j <= 5; j++) {
-                statistic[i][j] = temp[j];
-                sum += Integer.parseInt(temp[j]) * weight[j - 1];
+            String name = sc.next();
+            //总热度值
+            int hot = 0;
+            for (int j = 0; j < 5; j++) {
+                hot += sc.nextInt() * weights[j];
             }
-            //放总维度的和
-            statistic[i][6] = String.valueOf(sum);
-        }
-        //statistic： 名字 关注 收藏 fork issue MR 总分
-        //            0
-        Arrays.sort(statistic, (o1, o2) -> {
-            //先按总分排序，总分相同按名字转小写字典排序
-            if (Integer.parseInt(o1[6]) != Integer.parseInt(o2[6])) {
-                return Integer.parseInt(o2[6]) - Integer.parseInt(o1[6]);
-            } else {
-                return o1[0].toLowerCase().compareTo(o2[0].toLowerCase());
-            }
-        });
-        //输出排序后的名字
-        for (int i = 0; i < n; i++) {
-            System.out.println(statistic[i][0]);
+            projects[i] = new Project(name, hot);
         }
 
+        //排序：先按总热力值降序，相同则按转小写后的项目名字排序
+        Arrays.sort(projects, (a, b) -> {
+            if (a.hot != b.hot) return b.hot - a.hot;
+            else return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+        });
+
+        //打印
+        for (Project project : projects) {
+            System.out.println(project.name);
+        }
     }
 }
