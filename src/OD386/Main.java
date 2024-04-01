@@ -10,6 +10,7 @@ import java.util.Scanner;
  * @date 2024/3/19
  * @level 7
  * @score 200
+ * @url https://hydro.ac/d/HWOD2023/p/OD386
  */
 
 
@@ -75,14 +76,14 @@ public class Main {
         StringBuilder sb = new StringBuilder();
         for (String line : lines) {
             //按行遍历 将可能造成误会的 如\' \" 等替换为普通文本
-            //先把文本中的转义字符\" 替换为普通字符a
-            line = line.replaceAll("\\[\"]", "a")
+            //先把文本中的转义字符\"  \'替换为普通字符a
+            line = line.replaceAll("\\[\"']", "a")
                     //把双引号中的内容替换为普通文本 ?表示非贪婪模式：匹配最短的
                     .replaceAll("\"(.*?)\"", "s")
                     //把单引号括起来的内容替换为普通文本
                     .replaceAll("'(.*?)'", "d")
                     //把注释替换为空
-                    .replaceAll("--.+", "")
+                    .replaceAll("--(.+)", "")
                     //把空格替换为空
                     .replaceAll("\\s+", "");
 
