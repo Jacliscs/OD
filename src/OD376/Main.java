@@ -14,21 +14,6 @@ import java.util.Scanner;
 // 注意类名必须为 Main, 不要有任何 package xxx 信息
 public class Main {
 
-    static class Edge {
-        //边起点
-        int from;
-        //边终点
-        int to;
-        //边权重
-        int weight;
-
-        public Edge(int from, int to, int weight) {
-            this.from = from;
-            this.to = to;
-            this.weight = weight;
-        }
-    }
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         //基站数量 节点数 [1,n]
@@ -76,6 +61,21 @@ public class Main {
         }
         //如果最后不能找到除0之外的最小生成树，则返回-1
         return -1;
+    }
+
+    static class Edge {
+        //边起点
+        int from;
+        //边终点
+        int to;
+        //边权重
+        int weight;
+
+        public Edge(int from, int to, int weight) {
+            this.from = from;
+            this.to = to;
+            this.weight = weight;
+        }
     }
 }
 
