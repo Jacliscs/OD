@@ -1,99 +1,149 @@
 package OD396;
 
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Scanner;
-import java.util.TreeMap;
+import java.util.StringJoiner;
 
 /**
- * @author Jacliscs
+ * @author 浮生
  * @description 文件缓存系统
- * @date 2024/3/26
+ * @date 2024/4/4
  * @level 6
  * @score 200
- */
-
-/**
- * https://hydro.ac/d/HWOD2023/p/OD396
+ * @url https://hydro.ac/d/HWOD2023/p/OD396
  */
 // 注意类名必须为 Main, 不要有任何 package xxx 信息
 public class Main {
-    //文件访问次数
-    private static final TreeMap<String, Integer> file_times = new TreeMap<>();
-    //文件大小
-    private static final LinkedHashMap<String, Integer> file_sizes = new LinkedHashMap<>();
-    private static int m;
-    private static int n;
+    //共用时间
+    static int time = 0;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        //缓存最大值 整数，取值范围为 0 < m ≤ 52428800
-        m = Integer.parseInt(sc.nextLine());
-        //文件操作系列个数 [0,300000]
-        n = Integer.parseInt(sc.nextLine());
-        //文件操作 op file_name file_size
-        String[][] ops = new String[n][3];
+        //缓存总大小
+        int maxSize = Integer.parseInt(sc.nextLine());
+        //初始化
+        MyFileSystem myFileSystem = new MyFileSystem(maxSize);
+
+        //命令的条数
+        int n = Integer.parseInt(sc.nextLine());
+        //命令列表
         for (int i = 0; i < n; i++) {
-            ops[i] = sc.nextLine().split(" ");
-        }
+            String[] cmd = sc.nextLine().split(" ");
 
-    }
+            //如果是get操作
+            if (cmd.length == 2) {
+                myFileSystem.get(cmd[1]);
+            }
 
-    public static String getResult(String[][] ops) {
-        //最近访问
-        LinkedList<String> last_file = new LinkedList<>();
-
-        //新put的，则次数初始化1
-        for (String[] file : ops) {
-            String op = file[0];
-            String file_name = file[1];
-            int file_size = Integer.parseInt(file[2]);
-
-            switch (op) {
-                case "put":
-                    //先看是否已存在文件 不存在则添加，存在则什么也不做
-                    if (!file_times.containsKey(file_name)) {
-                        //检查是否内存足够
-                        int sum = 0;
-                        for (int val : file_sizes.values()) {
-                            sum += val;
-                        }
-                        //足够放下file的大小
-                        if (file_size <= (m - sum)) {
-                            //初始化访问次数1 按序添加
-                            file_times.put(file_name, 1);
-                            //添加内存
-                            file_sizes.put(file_name, file_size);
-                            //添加到访问时间的头部 表示最新 尾部表示最晚
-                            //先删掉原来file的访问顺序，添加到头部
-                            if (last_file.contains(file_name)) {
-                                last_file.remove(file_name);
-                                last_file.addFirst(file_name);
-                            } else {
-                                //如果之前访问顺序没有，则添加到头部
-                                last_file.addFirst(file_name);
-                            }
-                        } else {
-                            //内存不够，先删访问次数最少的，访问次数一样就删最远访问的
-                            while (m - sum < file_size) {
-
-
-                            }
-
-                        }
-
-
-                    } else {
-                        //如果不存在，则什么也不做
-
-                    }
-                    break;
-                case "get":
-                    //如果存在的话
-
+            //如果是put操作
+            if (cmd.length == 3) {
+                //如果单文件大于最大缓存，则输出NONE
+                if (Integer.parseInt(cmd[2]) > maxSize) {
+                    System.out.println("NONE");
+                    return;
+                }
+                myFileSystem.put(cmd[1], Integer.parseInt(cmd[2]));
             }
         }
-        return null;
+
+        //如果缓存中没有文件，则输出NONE
+        if (myFileSystem.files.isEmpty()) {
+            System.out.println("NONE");
+            return;
+        }
+
+        //把缓存中文件名字升序排序
+        StringJoiner sj = new StringJoiner(",");
+
+        myFileSystem.files.stream().sorted(((o1, o2) -> o1.name.compareTo(o2.name))).forEach(file -> sj.add(file.name));
+
+        //输出
+        System.out.println(sj.toString());
+
     }
 
+    //文件类
+    static class MyFile {
+        //文件名
+        String name;
+        //大小
+        int size;
+        //最近访问时间
+        int lastTime;
+        //访问次数
+        int count;
+
+        //新建文件初始化访问时间为当前time，并将time+1防止重复
+        public MyFile(String name, int size) {
+            this.name = name;
+            this.size = size;
+            this.lastTime = time++;
+            this.count = 1;
+        }
+    }
+
+    //文件操作类
+    static class MyFileSystem {
+        //总缓存大小
+        int maxSize;
+        //已使用缓存大小
+        int usedSize;
+        //已缓存的文件列表 优先队列，访问次数最少的优先级最高，访问次数一样的最近访问时间最小的优先级更高
+        PriorityQueue<MyFile> files = new PriorityQueue<>(((o1, o2) -> {
+            if (o1.count != o2.count) {
+                return o1.count - o2.count;
+            } else {
+                return o1.lastTime - o2.lastTime;
+            }
+        }));
+
+        //初始化
+        public MyFileSystem(int maxSize) {
+            this.maxSize = maxSize;
+        }
+
+        //put操作
+        public void put(String name, int size) {
+            //如果已经缓存有同名文件，则不做任何操作
+            for (MyFile file : files) {
+                if (file.name.equals(name)) {
+                    return;
+                }
+            }
+
+            //如果内存不够，则从优先队列队首依次移出
+            while (maxSize - usedSize < size) {
+                MyFile discard_file = files.poll();
+                //更新已使用大小
+                if (discard_file != null) {
+                    usedSize -= discard_file.size;
+                }
+            }
+
+            //内容足够放进缓存了
+            MyFile newFile = new MyFile(name, size);
+
+            //添加进优先队列
+            files.add(newFile);
+            //更新已使用的缓存大小
+            usedSize += size;
+        }
+
+        //get操作 使文件访问次数+1 且更新最近访问时间
+        public void get(String name) {
+            //如果不存在该文件，则不做任何操作
+            for (MyFile file : files) {
+                if (file.name.equals(name)) {
+                    //更新最近访问时间和访问次数
+                    file.lastTime = time++;
+                    file.count++;
+
+                    //重新插入优先队列排序
+                    files.remove(file);
+                    files.add(file);
+                    break;
+                }
+            }
+        }
+    }
 }
