@@ -1,5 +1,6 @@
 package OD342;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -30,29 +31,27 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        while (sc.hasNext()){
+        while (sc.hasNext()) {
             //成员个数
             int n = sc.nextInt();
             //成员财富，从1开始
-            int[]  wealth = new int[n+1];
+            int[] wealth = new int[n + 1];
             //该成员的家庭财富：自身+子节点
-            int[]  familyWealth = new int[n+1];
+            int[] familyWealth = new int[n + 1];
             for (int i = 1; i <= n; i++) {
                 wealth[i] = sc.nextInt();
                 //初始化家庭财富
                 familyWealth[i] = wealth[i];
             }
             //依次读取成员关系，并直接将对应子节点的值加到其对应的父节点的famliyWealth中
-            for(int i = 0; i < n-1; i++){
+            for (int i = 0; i < n - 1; i++) {
                 int parent = sc.nextInt();
                 int child = sc.nextInt();
                 familyWealth[parent] += wealth[child];
             }
-            //遍历找到最大的famliyWealth
-            int  max = 0;
-            for(int i : familyWealth){
-                max = Math.max(max, i);
-            }
+            //遍历找到最大的familyWealth
+            int max = Arrays.stream(familyWealth).max().orElse(0);
+
             System.out.println(max);
         }
         sc.close();
