@@ -77,6 +77,7 @@ public class Main {
             for (App registeredApp : registeredApps) {
                 if (isConflict(app, registeredApp)) {
                     //有冲突则开始下一个app与registeredApps中的app比较
+                    //如果只使用continue，则只能跳出registeredApp这个循环，会继续与下一个已注册app比较
                     continue outer;
                 }
             }
@@ -122,9 +123,13 @@ public class Main {
 
     //App类
     static class App {
+        //App名称
         String name;
+        //优先级
         int priority;
+        //开始时间
         int startTime;
+        //结束时间
         int endTime;
 
         //有参构造方法
