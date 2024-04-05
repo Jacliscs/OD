@@ -1,6 +1,7 @@
 package OD149;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -50,8 +51,10 @@ public class Main {
         BigInteger number = new BigInteger("0");
         //初始化符号
         char sign = '+';
+
         //存放操作数，正数单个加，负数整体加
         Stack<BigInteger> stack = new Stack<>();
+
         for (int i = 0; i < n; i++) {
             //因为要找最小和，遇到正号直接加，遇到负号把后面数字拼起来加
             char c = chars[i];
@@ -79,11 +82,7 @@ public class Main {
                 number = new BigInteger("0");
             }
         }
-        //把stack中的数字加起来
-        BigInteger sum = new BigInteger("0");
-        for (BigInteger i : stack) {
-            sum = sum.add(i);
-        }
-        return sum;
+        //返回stack求和
+        return stack.stream().reduce(BigInteger::add).orElse(new BigInteger("0"));
     }
 }
