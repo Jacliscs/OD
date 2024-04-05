@@ -8,6 +8,8 @@ import java.util.Scanner;
  * @date 2024/3/16
  * @level 6
  * @type 逻辑分析
+ * @score 100
+ * @url https://hydro.ac/d/HWOD2023/p/OD344
  */
 
 /**
@@ -47,9 +49,9 @@ public class Main {
             //如果是0，则判断该位置左边和右边是否有人，都没人则可以坐
             if (seat[i] == '0') {
                 //判断左边是否空闲
-                boolean isLeftFree = i == 0 ? true : seat[i - 1] == '0';
+                boolean isLeftFree = i == 0 || seat[i - 1] == '0';
                 //判断右边是否空闲
-                boolean isRightFree = i == seat.length - 1 ? true : seat[i + 1] == '0';
+                boolean isRightFree = i == seat.length - 1 || seat[i + 1] == '0';
                 //如果该位置左右都空闲，则count+1，
                 if (isLeftFree && isRightFree) {
                     count++;
