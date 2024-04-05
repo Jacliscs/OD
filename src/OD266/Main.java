@@ -53,7 +53,7 @@ public class Main {
     public static String getResult(String[][] records) {
         StringJoiner sj = new StringJoiner(" ");
         for (int i = 0; i < records.length; i++) {
-            sj.add(isAward(records[i]) ? "true" : "false");
+            sj.add(isAward(records[i]) + "");
         }
         return sj.toString();
     }
