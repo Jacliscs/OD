@@ -1,5 +1,6 @@
 package OD369;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -53,47 +54,41 @@ public class Main {
         for (int i = 0; i < n2; i++) {
             b[i] = sc.nextInt();
         }
-        swap(a, b);
+        System.out.println(swap(a, b));
     }
 
     //交换两个数组中的一个值，使两数组和相等，要求从a中取的数要尽量小
-    public static void swap(int[] arrA, int[] arrB) {
+    public static String swap(int[] arrA, int[] arrB) {
         int sumA = sum(arrA);
         int sumB = sum(arrB);
         //因为答案肯定存在，所以一定能被2整除
         int target = (sumA - sumB) / 2;
-        int min = Integer.MAX_VALUE;
-        int resA = 0;
-        int resB = 0;
+
+        //交换的值尽可能小
+        //int min = Integer.MAX_VALUE;
+
+        //把A升序排序，从头遍历，找到的第一个可交换的就一定是最小的
+        Arrays.sort(arrA);
+
+
+        //记录题解
+        String ans = "";
+
         //sumA - a + b = sumB -b + a
         // a-b = (sumA-sumB) / 2
         //即 a-b = target
         for (int a : arrA) {
             int temp = a - target;
-            //如果arrB中存在temp，且a的值小于当前最小值，则更新
+            //如果arrB中存在temp，因为A是升序排序，则当前a，b就是最优解
             for (int b : arrB) {
-                if (b == temp && a < min) {
-                    min = a;
-                    resA = a;
-                    resB = b;
+                if (b == temp) {
+                    return a + " " + b;
                 }
             }
         }
-        System.out.println(resA + " " + resB);
+        //输入保证答案肯定存在
+        return ans;
 
-
-        //for (int i = 0; i < a.length; i++) {
-        //    int temp = a[i];
-        //    for (int j = 0; j < b.length; j++) {
-        //        if (sumA - temp + b[j] == target && temp<min) {
-        //            min = temp;
-        //            resA = temp;
-        //            resB = b[j];
-        //        }
-        //    }
-        //}
-        //输出
-        //System.out.println(resA + " " + resB);
     }
 
     //求数组和
