@@ -1,9 +1,6 @@
 package OD247;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.StringJoiner;
+import java.util.*;
 
 /**
  * @author Jacliscs
@@ -11,6 +8,7 @@ import java.util.StringJoiner;
  * @date 2024/3/20
  * @level 4
  * @score 100
+ * @url https://hydro.ac/d/HWOD2023/p/OD247
  */
 
 /**
@@ -40,35 +38,30 @@ public class Main {
         //小朋友个数
         int n = sc.nextInt();
         //小朋友
-        int[] heights = new int[n];
+        Integer[] heights = new Integer[n];
         for (int i = 0; i < n; i++) {
             heights[i] = sc.nextInt();
         }
         System.out.println(sortHeight(heights, h));
-
     }
 
     //按与小明身高差的绝对值从小到大排序
-    public static String sortHeight(int[] heights, int h) {
-        //存放身高差
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < heights.length; i++) {
-            //小朋友下标  身高差绝对值
-            map.put(i, Math.abs(heights[i] - h));
-        }
-        StringJoiner sj = new StringJoiner(" ");
-        //按绝对值从小到大排序，绝对值一样按身高排序
-        map.entrySet().stream().sorted((a, b) -> {
-            if (a.getValue() != b.getValue()) {
-                return a.getValue() - b.getValue();
-            } else {
-                //绝对值相同，谁个小谁在前面
-                //如果绝对值相同，个子相同，则不改变
-                return heights[a.getKey()] - heights[b.getKey()];
-            }
-        }).forEach(e -> {
-            sj.add(String.valueOf(heights[e.getKey()]));
+    public static String sortHeight(Integer[] heights, int h) {
+        //排序 要使用Integer[]才能直接做“-“法
+        Arrays.sort(heights, (a, b) -> {
+            //身高差的绝对值
+            int absA = Math.abs(a - h);
+            int absB = Math.abs(b - h);
+
+            //绝对值升序
+            if (absA != absB) return absA - absB;
+                //绝对值相同，按身高排序
+            else return a - b;
         });
+        StringJoiner sj = new StringJoiner(" ");
+        for (Integer height : heights) {
+            sj.add(height + "");
+        }
         return sj.toString();
     }
 
