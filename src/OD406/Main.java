@@ -35,7 +35,7 @@ public class Main {
         int[] windows = new int[n * k];
         //正在填的索引位置
         int index = 0;
-        //正在第几个列表中取值 [0,lists.size()]
+        //正在第几个列表中取值 [0,lists.size()) 左闭右开
         int level = 0;
 
         //填满了则跳出循环
