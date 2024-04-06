@@ -45,7 +45,8 @@ public class Main {
     //方法
     public static int getResult(int n) {
         //如 10011100 -> 10100011
-        //把n转为二进制，然后统计1的个数
+        //把n转为二进制，然后统计1的个数 从右遍历到第一个“01”改为“10”，并把右边的1全部加到末尾
+        //首部添0，如111 -> 0111 -> 1011
         String n_binary = "0" + Integer.toBinaryString(n);
         char[] chars = n_binary.toCharArray();
         //统计改变位置右边的1的个数
@@ -75,9 +76,7 @@ public class Main {
             }
         }
         //把2进制chars数组转为10进制
-        int result = Integer.parseInt(new String(chars), 2);
-
-        return result;
+        return Integer.parseInt(new String(chars), 2);
     }
 
 }
