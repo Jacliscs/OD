@@ -9,11 +9,9 @@ import java.util.Scanner;
  * @date 2024/3/26
  * @level 7
  * @score 200
+ * @url https://hydro.ac/d/HWOD2023/p/OD399
  */
 
-/**
- * https://hydro.ac/d/HWOD2023/p/OD399
- */
 // 注意类名必须为 Main, 不要有任何 package xxx 信息
 public class Main {
     private static int[] numbers;
@@ -34,14 +32,14 @@ public class Main {
 
     public static int getResult() {
         //左右滑动窗口共N个，必连续，左边x个，右边就是N-x个
-        //初始右边0个
+        //初始右边吃0个
         int right = 0;
-        //初始左边N个
+        //初始左边吃n个
         int left = 0;
         for (int i = 0; i < n; i++) {
             left += numbers[i];
         }
-        //如果N=n，全吃
+        //如果n = len，全吃
         if (n == len) {
             return left;
         }
