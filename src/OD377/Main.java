@@ -1,6 +1,5 @@
 package OD377;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -42,25 +41,12 @@ public class Main {
         //统计山峰个数：比两边山高，或者在边界比旁边的高
         for (int i = 0; i < mountains.length; i++) {
             //控制左右，防止越界
-            int left = i - 1 >= 0 ? mountains[i - 1] : 0;
-            int right = i + 1 < mountains.length ? mountains[i + 1] : 0;
+            int left = i == 0 ? 0 : mountains[i - 1];
+            int right = i == mountains.length - 1 ? 0 : mountains[i + 1];
             if (mountains[i] > left && mountains[i] > right) {
                 count++;
             }
-            ////先处理边界 防止下标越界
-            //if (i == 0 || i == mountains.length - 1){
-            //    if (i==0 &&  mountains[i] > mountains[i + 1]){
-            //        count++;
-            //    }
-            //    if (i==mountains.length - 1 && mountains[i] > mountains[i - 1]){
-            //        count++;
-            //    }
-            //    continue;
-            //}
-            ////中间值
-            //if (mountains[i] > mountains[i - 1] && mountains[i] > mountains[i + 1]){
-            //    count++;
-            //}
+
         }
         System.out.println(count);
     }
