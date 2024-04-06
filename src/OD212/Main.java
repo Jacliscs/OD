@@ -8,6 +8,7 @@ import java.util.*;
  * @date 2024/3/20
  * @level 3
  * @score 100
+ * @url https://hydro.ac/d/HWOD2023/p/OD212
  */
 
 /**
@@ -43,12 +44,6 @@ public class Main {
             map.put(i, map.getOrDefault(i, 0) + 1);
         }
         //找到最大出现次数max
-        //int max = 0;
-        //for (int key : map.keySet()) {
-        //    if (map.get(key) > max) {
-        //        max = map.get(key);
-        //    }
-        //}
         int max = map.values().stream().max(Integer::compareTo).orElse(0);
 
         //存放众数
