@@ -95,7 +95,7 @@ public class Main {
         //打印结果
         StringJoiner joiner = new StringJoiner(",");
         //把result_list中的插入到joiner中
-        result_list.forEach(s -> joiner.add(s));
+        result_list.forEach(joiner::add);
         return joiner.toString();
     }
 
