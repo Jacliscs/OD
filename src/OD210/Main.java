@@ -35,29 +35,11 @@ public class Main {
 
     //计算最少停车数 001001000111001
     public static int countMin(String str) {
-        int count = 0;
         str = str.replaceAll("111", "c")
                 .replaceAll("11", "c")
-                .replaceAll("1", "c");
-        for (int i = 0; i < str.length(); i++) {
-            if (str.charAt(i) == 'c') {
-                count++;
-            }
-        }
-
-        ////上一次长度
-        //int preLength = str.length();
-        ////先替换三个位置的111
-        //str = str.replaceAll("111","");
-        //count += (preLength-str.length())/3;
-        //preLength = str.length();
-        ////替换占2个位置的11
-        //str =  str.replaceAll("11","");
-        //count +=  (preLength-str.length())/2;
-        //preLength = str.length();
-        ////替换占1个位置的
-        //str =  str.replaceAll("1","");
-        //count +=  preLength-str.length();
-        return count;
+                .replaceAll("1", "c")
+                .replaceAll("0", "");
+        //现在有多少个c就是停了多少车
+        return str.length();
     }
 }
