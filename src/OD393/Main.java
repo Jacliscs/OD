@@ -16,17 +16,6 @@ import java.util.StringJoiner;
  */
 // 注意类名必须为 Main, 不要有任何 package xxx 信息
 public class Main {
-    //将ip地址转为整数
-    //public static long ip_to_dec(String ip) {
-    //    long res = 0;
-    //
-    //    String[] blocks = ip.split("\\.");
-    //
-    //    for (String block : blocks) {
-    //        res = (Integer.parseInt(block)) | (res << 8);
-    //    }
-    //    return res;
-    //}
 
     public static long ip_to_dec(String ip) {
         String[] blocks = ip.split("\\.");
@@ -53,6 +42,7 @@ public class Main {
 
         //城市ip列表
         String[] cities = sc.nextLine().split(";");
+        //请求的ip列表
         String[] queryIps = sc.nextLine().split(",");
 
         for (String city : cities) {
@@ -74,11 +64,16 @@ public class Main {
             long minLen = Long.MAX_VALUE;
 
             for (Range range : ranges) {
-                //包含在range的地址段，且range的字段长度小于当前最小minLen，则是最优的
-                if (ipDec >= range.startIpDec && ipDec <= range.endIpDec && range.ipLen < minLen) {
-                    city = range.city;
-                    minLen = range.ipLen;
+                //包含在range的地址段
+                if (ipDec >= range.startIpDec && ipDec <= range.endIpDec) {
+                    //如果当前匹配到的字段更短，或字段长度与最小长度一样，取city字典更大的
+                    if (range.ipLen < minLen || range.ipLen == minLen && range.city.compareTo(city) > 0) {
+                        //更新
+                        city = range.city;
+                        minLen = range.ipLen;
+                    }
                 }
+
             }
             //如果没匹配到，输出""
             sj.add(city);
