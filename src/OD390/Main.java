@@ -13,6 +13,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        //玩家名、出拳形状
         Map<String, String> map = new HashMap<>();
         //玩家数不固定 1-1000
         while (sc.hasNext()) {
@@ -27,6 +28,7 @@ public class Main {
         Set<String> set = new HashSet<>(map.values());
         //存放赢家name
         List<String> list = new ArrayList<>();
+        //三种形状都有或只有一种形状，则平局
         if (set.size() == 3 || set.size() == 1) {
             System.out.println("NULL");
         } else {
@@ -37,13 +39,9 @@ public class Main {
                         list.add(s);
                     }
                 });
-
-                //for (String key : map.keySet()) {
-                //    if (map.get(key).equals("A")) {
-                //        list.add(key);
-                //    }
-                //}
-            } else if (!set.contains("B")) {
+            }
+            //只有手势AC，则C是赢家
+            else if (!set.contains("B")) {
                 for (String key : map.keySet()) {
                     //C是赢家
                     if (map.get(key).equals("C")) {
@@ -60,10 +58,7 @@ public class Main {
             }
             //把赢家id按字符升序排列
             list.sort(String::compareTo);
-            for (String s : list) {
-                System.out.println(s);
-            }
-
+            list.forEach(System.out::println);
         }
     }
     //输出赢家，没有赢家则输出NULL
