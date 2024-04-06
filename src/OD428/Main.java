@@ -45,12 +45,14 @@ public class Main {
         }
         //最后一辆车花费的时间 到达时间-出发时刻
         double cost = arrived - (m - 1);
-        //没有小数时输出整数，有小数时保留三位
+        //实际考试不需要考虑精度
+        System.out.println(cost);
 
         //格式化打印小数
-        NumberFormat nf = NumberFormat.getNumberInstance();
-        nf.setMinimumFractionDigits(0);//最少保留0位小数
-        nf.setMaximumFractionDigits(3);//最大保留3位小数
-        System.out.println(nf.format(cost));
+        //没有小数时输出整数，有小数时保留三位
+        //NumberFormat nf = NumberFormat.getNumberInstance();
+        //nf.setMinimumFractionDigits(0);//最少保留0位小数
+        //nf.setMaximumFractionDigits(3);//最大保留3位小数
+        //System.out.println(nf.format(cost));
     }
 }
