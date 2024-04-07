@@ -21,30 +21,43 @@ public class Main {
 
 class Solution {
     public String longestPalindrome(String s) {
-        //最大回文串长度
-        int maxLen = 0;
-        String ans = "";
-        for (int i = 0; i < s.length(); i++) {
-            //从右往左遍历，
-            for (int j = s.length(); j > i; j--) {
-                String tmp = s.substring(i, j);
-                if (check(tmp) && tmp.length() > maxLen) {
-                    maxLen = tmp.length();
-                    ans = tmp;
+        //如果s为null或者长度为1，则返回自身
+        if (s == null || s.length() == 1) {
+            return s;
+        }
+
+        //dp[i][j]表示s[i....j]是否是回文子串，动态规划
+        int n = s.length();
+        boolean[][] dp = new boolean[n][n];
+
+        //初始化所有单个字符都是回文串 后面l,r不会相等，当r-l<=2时且两端相等，就可以判定是回文串了
+        //for (int i = 0; i < n; i++){
+        //    dp[i][i] = true;
+        //}
+
+        //最大回文串的起点、终点
+        int start = 0;
+        int end = 0;
+        int maxLen = 1;
+
+        //动态规划 dp[i][j]是回文串必须dp[i+1][j-1]也是回文串且s[i]==s[j]
+        for (int r = 1; r < n; r++) {
+            for (int l = 0; l < r; l++) {
+                //2个或者3个字符时，如果左右边界相等，则一定是回文即r-l<=2 大于3个字符则需要用dp[l+1][r-1]
+                if (s.charAt(l) == s.charAt(r) && (r - l <= 2 || dp[l + 1][r - 1])) {
+                    //标记状态
+                    dp[l][r] = true;
+                    //如果长度大于当前最大回文串，则更新长度和位置
+                    if (r - l + 1 > maxLen) {
+                        maxLen = r - l + 1;
+                        //[l,r]是回文串，闭区间
+                        start = l;
+                        end = r;
+                    }
                 }
             }
         }
-        return ans;
-    }
-
-    /**
-     * 判断字符串s是否是回文串
-     *
-     * @param s
-     * @return boolean
-     */
-    public static boolean check(String s) {
-        StringBuilder sb = new StringBuilder(s);
-        return sb.reverse().toString().equals(s);
+        //[l,r]闭区间是最大回文串
+        return s.substring(start, end + 1);
     }
 }
