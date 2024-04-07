@@ -114,7 +114,7 @@ public class Main {
             int diff = heights[j] - heights[j - 1];
             //如果右边高
             if (diff > 0) {
-                //只考虑单向上下 即 0->1->0
+                //只考虑单向上下 即 0->1->0 上去消耗2倍体力，下山消耗1倍体力
                 cost += diff * 3;
                 //如果heights[j] > heights[j+1] 或i在边界 则i是山峰
                 if (j + 1 >= heights.length || heights[j] > heights[j + 1]) {
