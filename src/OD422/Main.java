@@ -49,7 +49,7 @@ public class Main {
             y += sy;
             x += sx;
 
-            //判断x是否越界
+            //判断x是否越界 x越界位移方向改变sx
             if (x < 0) {
                 //碰到左边 x += 2
                 x = 1;
@@ -61,7 +61,7 @@ public class Main {
                 sx = -sx;
             }
 
-            //判断y是否越界
+            //判断y是否越界 y越界改变sy
             if (y < 0) {
                 y = 1;
                 sy = -sy;
