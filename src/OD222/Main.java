@@ -51,6 +51,10 @@ public class Main {
                     sj.add(i + "");
                     sj.add(n / i + "");
                     return sj.toString();
+                } else {
+                    //i或者n/i 其中有一个不是素数，则n不可能被分解为两个素数之积
+                    //减少循环次数
+                    break;
                 }
             }
         }
