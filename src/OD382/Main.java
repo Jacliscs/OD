@@ -65,11 +65,13 @@ public class Main {
             //minEven_len / 2 - 1 是距离
             long minEven_len = n / x * 2;
             long minEven_start = x / 2 - (minEven_len / 2 - 1);
-            //2.最短序列是奇数 如12=3+4+5 最短长度就是能被n整除的最小奇数(大于1)
-            long minOdd_len = getMinOddLen(n, x);
-            // n/minOdd_len 是中位数
-            // (minOdd_len-1)/2是距离
+
+            //2.最短序列是奇数 如12=3+4+5 最短长度就是能被n整除的最小奇数(大于1) 18=5+6+7
+            long minOdd_len = getMinOddLen(n, x);//返回的是最小的能被n整除的奇数，如果没有比x小的，就返回x=7
+            // n/minOdd_len 是中位数 (minOdd_len-1)/2是距离
+            // 14 = -1+0+1 +2+3+4+5 用minOdd_Start>=1判断是否合法
             long minOdd_start = n / minOdd_len - ((minOdd_len - 1) / 2);
+
             //3.不能分解
             long len;
             long start;
@@ -113,7 +115,7 @@ public class Main {
         if (x < 3) {
             return -1;
         }
-        //如12 = 3+4+5 12的最大奇因数为3 需要找到能被n整除的最小奇数
+        //如18 = 5+6+7 18的最大奇因数为9 需要找到能被n整除的最小奇数
         for (long i = 3; i * i <= x; i += 2) {
             if (x % i == 0) {
                 return i;
