@@ -1,6 +1,7 @@
 package Code1;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -25,13 +26,25 @@ class Solution {
     public int[] twoSum(int[] nums, int target) {
         //转为List
         int[] ans = new int[2];
+        //暴力
+        //for (int i = 0; i < nums.length; i++) {
+        //    for (int j = i + 1; j < nums.length; j++) {
+        //        if (nums[i] + nums[j] == target) {
+        //            ans = new int[]{i, j};
+        //            break;
+        //        }
+        //    }
+        //}
+
+        //使用哈希表 数字，对应下标
+        HashMap<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
-            for (int j = i + 1; j < nums.length; j++) {
-                if (nums[i] + nums[j] == target) {
-                    ans = new int[]{i, j};
-                    break;
-                }
+            //如果存在对应结果
+            if (map.containsKey(target - nums[i])) {
+                ans = new int[]{map.get(target - nums[i]), i};
+                break;
             }
+            map.put(nums[i], i);
         }
         return ans;
     }
