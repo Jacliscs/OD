@@ -48,8 +48,6 @@ public class Main {
         System.out.println(ans);
     }
 
-    //递归判断当前分配方式是否可行
-
     /**
      * 递归判断分月饼的总方案数
      *
