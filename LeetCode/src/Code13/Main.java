@@ -1,5 +1,6 @@
 package Code13;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -25,52 +26,33 @@ class Solution {
     public int romanToInt(String s) {
         //记录题解[1,3999]
         int ans = 0;
+        int n = s.length();
 
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if (c == 'M') {
-                ans += 1000;
-            } else if (c == 'D') {
-                ans += 500;
-            } else if (c == 'C') {
-                //右边是否有D、M
-                if (i + 1 < s.length() && s.charAt(i + 1) == 'D') {
-                    ans += 400;
-                    i++;
-                } else if (i + 1 < s.length() && s.charAt(i + 1) == 'M') {
-                    ans += 900;
-                    i++;
-                } else {
-                    ans += 100;
-                }
-            } else if (c == 'L') {
-                ans += 50;
-            } else if (c == 'X') {
-                //右边是否是L、C
-                if (i + 1 < s.length() && s.charAt(i + 1) == 'L') {
-                    ans += 40;
-                    i++;
-                } else if (i + 1 < s.length() && s.charAt(i + 1) == 'C') {
-                    ans += 90;
-                    i++;
-                } else {
-                    ans += 10;
-                }
-            } else if (c == 'V') {
-                ans += 5;
-            } else if (c == 'I') {
-                //右边是否有V、X
-                if (i + 1 < s.length() && s.charAt(i + 1) == 'V') {
-                    ans += 4;
-                    i++;
-                } else if (i + 1 < s.length() && s.charAt(i + 1) == 'X') {
-                    ans += 9;
-                    i++;
-                } else {
-                    ans++;
-                }
+        //存放对应字符的数字
+        HashMap<Character, Integer> map = new HashMap<>() {
+            {
+                put('I', 1);
+                put('V', 5);
+                put('X', 10);
+                put('L', 50);
+                put('C', 100);
+                put('D', 500);
+                put('M', 1000);
+            }
+        };
+
+        for (int i = 0; i < n; i++) {
+            int cur = map.get(s.charAt(i));
+            //比较下一位数字与当前位置的大小关系
+            if (i + 1 < n && cur < map.get(s.charAt(i + 1))) {
+                //小于则减去cur
+                ans -= cur;
+            } else {
+                //大于等于则加上cur
+                ans += cur;
             }
         }
+
         return ans;
     }
 }
