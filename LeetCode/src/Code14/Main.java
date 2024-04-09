@@ -21,23 +21,30 @@ public class Main {
 
 class Solution {
     public String longestCommonPrefix(String[] strs) {
-        //最长公共前缀
-        String ans = "";
-
-        //第一个元素
-        String s1 = strs[0];
-
-        for (int i = 0; i < s1.length(); i++) {
-            String tmp = ans + s1.charAt(i);
-            //如果有字符不以tmp为前缀，则返回ans
-            for (String str : strs) {
-                if (!str.startsWith(tmp)) {
-                    return ans;
-                }
-            }
-            //否则，更新前缀长度
-            ans = tmp;
+        //如果数组为空
+        if (strs == null || strs.length == 0) {
+            return "";
         }
-        return ans;
+
+        //每次与后一个更新最长前缀
+        String prefix = strs[0];
+
+        for (int i = 1; i < strs.length; i++) {
+            prefix = getMaxCommonPrefix(prefix, strs[i]);
+            //如果与后一个没有公共前缀，则prefix=="";
+            if (prefix.length() == 0) break;
+        }
+        return prefix;
     }
+
+    public static String getMaxCommonPrefix(String s1, String s2) {
+        int length = Math.min(s1.length(), s2.length());
+        int index = 0;
+        while (index < length && s1.charAt(index) == s2.charAt(index)) {
+            index++;
+        }
+        //公共前缀
+        return s1.substring(0, index);
+    }
+
 }
