@@ -23,36 +23,24 @@ public class Main {
 
 class Solution {
     public boolean canJump(int[] nums) {
-        boolean[] used = new boolean[nums.length];
+        //能跳的最远距离
+        int fast = 0;
+        //目标位置
+        int target = nums.length - 1;
+        //如果目标位置就是起点
+        if (target == 0) return true;
 
-        return dfs(nums, 0, used);
-    }
-
-    public static boolean dfs(int[] nums, int index, boolean[] used) {
-        //返回标志
-        if (index == nums.length - 1) return true;
-
-        //如果跳到的nums[index]格为0，且不是最后一格，则返回false
-        if (nums[index] == 0 && index != nums.length - 1) return false;
-
-        //如果可以直接到达末尾，返回true
-        if (index + nums[index] >= nums.length - 1) return true;
-
-        for (int i = index; i <= index + nums[index]; i++) {
-            if (used[i]) continue;
-
-            //每个位置可以跳1-nums[index]步
-            for (int j = 1; j <= nums[i]; j++) {
-                used[i] = true;
-                //递归，在i位置跳j步，后续能否到达终点
-                if (dfs(nums, i + j, used)) return true;
-                //恢复
-                used[i] = false;
+        //逐个更新最远距离，一旦发现能到达target，就返回true
+        for (int i = 0; i < nums.length; i++) {
+            //如果当前位置是能到达的
+            if (i <= fast) {
+                //更新最远位置
+                fast = Math.max(fast, i + nums[i]);
+                //是否能到target
+                if (fast >= target) return true;
             }
         }
-
-        //没返回true，则说明不能到达终点
+        //遍历完没有返回true，则不嫩到达
         return false;
     }
-
 }
