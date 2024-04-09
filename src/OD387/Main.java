@@ -97,7 +97,7 @@ public class Main {
             //记录引用字符串 如<A>
             String reference = m.group(0);
             //引用的长度只能是3
-            if ((m.group().length() != 3)) {
+            if (reference.length() != 3) {
                 return false;
             }
 
