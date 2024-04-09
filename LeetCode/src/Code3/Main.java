@@ -1,5 +1,6 @@
 package Code3;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
 
@@ -29,30 +30,24 @@ class Solution {
      * @return int
      */
     public int lengthOfLongestSubstring(String s) {
-        if (s.equals("")) {
-            return 0;
-        }
-
-        //最大长达
-        int maxLen = 1;
-
-        for (int i = 0; i < s.length(); i++) {
-            //存放字符
-            HashSet<String> set = new HashSet<>();
-            //把第i位放入
-            set.add(s.charAt(i) + "");
-            for (int j = i + 1; j < s.length(); j++) {
-                //如果不重复，则放入，更新最大长度
-                if (!set.contains(s.charAt(j) + "")) {
-                    set.add(s.charAt(j) + "");
-                    maxLen = Math.max(maxLen, set.size());
-                } else {
-                    //重复了，更新最大长度，并清空set
-                    maxLen = Math.max(maxLen, set.size());
-                    break;
-                }
+        //存放字符以及出现的下标
+        HashMap<Character, Integer> map = new HashMap<>();
+        //开始的左边界
+        int left = -1;
+        //题解
+        int ans = 0;
+        int len = s.length();
+        for (int right = 0; right < len; right++) {
+            //[left,right]中无重复字符
+            if (map.containsKey(s.charAt(right))) {
+                //更新左边界
+                left = Math.max(left, map.get(s.charAt(right)));
             }
+            //存放右边届
+            map.put(s.charAt(right), right);
+            //更新长度
+            ans = Math.max(ans, right - left);
         }
-        return maxLen;
+        return ans;
     }
 }
