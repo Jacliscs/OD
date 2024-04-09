@@ -24,24 +24,25 @@ public class Main {
 class Solution {
     public int longestPalindrome(String s) {
         int length = s.length();
-        //只有单个字符，本身就是最长回文串
-        if (length == 1) return 1;
+        //存放不同的字符和次数 使用哈希表效率不高
+        //HashMap<Character, Integer> map = new HashMap<>();
+
+        //使用数组存放单个字符出现的次数
+        //s 只由小写 和/或 大写英文字母组成 直接使用128的长度，包含所有ASCII表
+        char[] cnts = new char[128];
+        for (int i = 0; i < length; i++) {
+            char ch = s.charAt(i);
+            cnts[ch]++;
+        }
 
         //题解：最长回文串长度
         int ans = 0;
-
-        //存放不同的字符和次数
-        HashMap<Character, Integer> map = new HashMap<>();
-        for (int i = 0; i < length; i++) {
-            char ch = s.charAt(i);
-            map.put(ch, map.getOrDefault(ch, 0) + 1);
-        }
-        //每个字符的次数用times/2 * 2，如3->2，4->4
-        //如果当前回文串长度为偶数，则+1
-        for (Character c : map.keySet()) {
-            ans += map.get(c) / 2 * 2;
-            //如果当前c的次数是奇数次，且当前回文串是偶数长度
-            if (map.get(c) % 2 == 1 && ans % 2 == 0) ans++;
+        for (int cnt : cnts) {
+            ans += cnt / 2 * 2;
+            //如果是奇数次，且当前长度是偶数
+            if (cnt % 2 == 1 && ans % 2 == 0) {
+                ans++;
+            }
         }
         return ans;
     }
