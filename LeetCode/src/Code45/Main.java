@@ -28,22 +28,21 @@ class Solution {
      */
     public int jump(int[] nums) {
         //由输入控制一定能跳到最后
-        //反向查找，每次都跳到能到达该点的最小索引处
-        int pos = nums.length - 1;
+        //当前能跳到的边界位置，每次边界位置都更新为能跳的最大距离
+        int end = 0;
+        //在第i步内，所能到达的最远位置，每到达边界位置时才会步数+1
+        int maxPos = 0;
         int step = 0;
-        while (pos > 0) {
-            //从0到pos遍历，找到第一个能跳到pos的点就返回
-            for (int i = 0; i < pos; i++) {
-                //i点能跳跃到pos，则i是离pos最远的点
-                if (i + nums[i] >= pos) {
-                    pos = i;
-                    step++;
-                    break;
-                }
+
+        //不遍历最后一个位置
+        for (int i = 0; i < nums.length - 1; i++) {
+            maxPos = Math.max(maxPos, i + nums[i]);
+            //到达边界时，更新下一步能到达的最远距离
+            if (i == end) {
+                end = maxPos;
+                step++;
             }
         }
-
         return step;
     }
-
 }
