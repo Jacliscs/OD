@@ -44,7 +44,13 @@ public class Main {
         //根据command决定是编码还是解码
         switch (command) {
             case 1:
-                System.out.println(encode(str));
+                try {
+                    System.out.println(encode(str));
+                } catch (Exception e) {
+                    //1
+                    //[[1,String,I am Mary]]
+                    System.out.println("ENCODE_ERROR");
+                }
                 break;
             case 2:
                 try {
@@ -80,8 +86,6 @@ public class Main {
                 stack.addLast(c);
             }
         }
-
-
         //最后合法的话stack中的[]应该两两抵消
         return stack.isEmpty();
     }
@@ -96,6 +100,7 @@ public class Main {
      * @create 2024/4/3 18:22
      */
     public static boolean check_encoded(String pos, String type, String data) {
+        //1#1#9#I am Mary
         //如果位置不是以一个或多个数字开头结尾的
         if (!num_RegExp.matcher(pos).find()) {
             return false;
@@ -202,12 +207,13 @@ public class Main {
      */
     public static String decode(String str) {
         //2
-        //1#1#9#I am Mary2#0#2#233#0#3#8794#2#25#1#1#10#I am Kitty2#0#2#44
+        //1#1#9#I am Mary2#0#2#233#0#3#879
 
         //各数据区没有分隔符、含有嵌套
 
         LinkedList<String> queue = new LinkedList<String>();
         //把去除#之后的放进queue
+        //1 1 9 I am Mary2 0 2 233 0 3 879
         Collections.addAll(queue, str.split("#"));
 
         //记录解码后的内容
@@ -217,11 +223,12 @@ public class Main {
         while (!queue.isEmpty()) {
             //默认解码字符串合法，则按顺序是pos type len data
             //非法处理在main方法中
-            String pos = queue.removeFirst();
-            String type = queue.removeFirst();
-            int len = Integer.parseInt(queue.removeFirst());
+            String pos = queue.removeFirst();//1
+            String type = queue.removeFirst();//1
+            int len = Integer.parseInt(queue.removeFirst());//9
 
             //剩余部分重新以#链接
+            //I am Mary2#0#2#233#0#3#879
             String remain = String.join("#", queue);
             queue.clear();
 
@@ -234,6 +241,7 @@ public class Main {
             }
 
             //如果有嵌套的，则把嵌套的data解码
+            //4#2#25#1#1#10#I am Kitty data:1#10#I am Kitty
             if (type.equals("2")) {
                 data = decode(data);
             }
