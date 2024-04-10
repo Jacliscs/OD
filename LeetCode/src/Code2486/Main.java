@@ -28,21 +28,15 @@ class Solution {
      * @return int
      */
     public int appendCharacters(String s, String t) {
-        int n = s.length();
-        int m = t.length();
-        int res = 0;
-        //指向t中的字符
-        int i = 0, j = 0;
-        while (i < n && j < m) {
-            if (s.charAt(i) == t.charAt(j)) {
-                i++;
-                j++;
-                //相同字符数+1
-                res++;
-            } else {
-                i++;
-            }
+        //指向t的字符
+        int p = 0;
+        for (char c : s.toCharArray()) {
+            //如果字符跟当前p指向的相同，则p往右移
+            if (c == t.charAt(p)) p++;
+            //如果p已经到了t末尾，则跳出
+            if (p == t.length()) break;
         }
-        return t.length() - res;
+        //p指向t中不需要追加的字符末尾
+        return t.length() - p;
     }
 }
