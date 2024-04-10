@@ -61,7 +61,6 @@ public class Main {
      * @param len   当前排列的长度
      * @param used  记录元素是否被使用
      * @param count 统计满足条件的个数
-     * @return void
      * @create 2024/3/29 17:02
      */
     public static int dfs(char[] chs, int pre, int len, boolean[] used, int count) {
