@@ -37,7 +37,7 @@ public class Main {
         //每人最少需要多少天
         int min = requirements[len - 1];
         //最多需要多少天
-        int max = Arrays.stream(requirements).reduce(Integer::sum).orElse(0);
+        int max = Arrays.stream(requirements).sum();
 
         //题解
         int ans = max;
