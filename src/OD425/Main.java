@@ -37,6 +37,7 @@ public class Main {
     public static void dfs(int index, boolean[] used, int biggerCount) {
         //返回上一层标志
         if (index >= a.length) {
+            //记录最优解 要a[i]>b[i]的数最多
             if (biggerCount > maxBiggerCount) {
                 //刷新
                 maxBiggerCount = biggerCount;
@@ -54,6 +55,7 @@ public class Main {
             if (i > 0 && a[i] == a[i - 1] && !used[i - 1]) continue;
             used[i] = true;
             //递归
+            //注意biggerCount是否增加
             dfs(index + 1, used, biggerCount + ((a[i] > b[index]) ? 1 : 0));
             //恢复
             used[i] = false;
