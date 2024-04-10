@@ -52,11 +52,8 @@ public class Main {
         int sum = Arrays.stream(scores).sum();
         //res 中存放的是所有5人战斗力的集合，假如1队战斗力为sum1,另一队战斗力就是sum-sum1 差值的绝对值就是Math.abs(sum-2*sum1)
         //然后求差值的最小值
-        int min = res.stream().map(sum1 -> Math.abs(sum - 2 * sum1)).min((a, b) -> a - b).orElse(0);
-        return min;
+        return res.stream().map(sum1 -> Math.abs(sum - 2 * sum1)).min((a, b) -> a - b).orElse(0);
     }
-
-    //10选5去重组合
 
     /**
      * 10选5去重组合，并将5人组合的战斗力之和加入res
