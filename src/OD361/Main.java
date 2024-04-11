@@ -49,6 +49,7 @@ public class Main {
         n = sc.nextInt();
         k = sc.nextInt();
         isUsed = new boolean[m][n];
+        //存放数位和 长度是m n 最大值的数位和
         digitSum = getDigitSum(Math.max(m, n));
         dfs(0, 0);
         System.out.println(ans);
