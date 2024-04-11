@@ -56,6 +56,7 @@ public class Main {
 
     /**
      * 从matrix[i][j]为中心，扩散寻找最多的局域网服务器
+     * 类似LeetCode200题，岛屿数量 ： https://leetcode.cn/problems/number-of-islands/description/
      *
      * @param i
      * @param j
