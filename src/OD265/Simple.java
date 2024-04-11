@@ -63,8 +63,10 @@ public class Simple {
                 vowelIndex.add(i);
             }
         }
+        //保存瑕疵度相同的最长元音子串长度
         int maxLen = 0;
         int n = vowelIndex.size();
+        //双指针
         int left = 0;
         int right = 0;
         while (right < n) {
