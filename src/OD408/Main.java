@@ -24,7 +24,6 @@ public class Main {
     //最小步数和 记录所有马到达chess[i][j]的最小步数和
     private static int[][] stepChess;
     //记录所有马可以到达的公共位置坐标
-    //private static HashSet<int[]> reach; //二维坐标
     private static HashSet<Integer> reach;//二维转一维
 
     //马走日的偏移量
@@ -48,7 +47,6 @@ public class Main {
             chess[i] = sc.next().toCharArray();
             //初始时 假设所有位置都是所有马可到达的 后面取交集
             for (int j = 0; j < n; j++) {
-                //reach.add(new int[]{i,j});//二维
                 reach.add(i * n + j);//一维
             }
         }
@@ -61,7 +59,7 @@ public class Main {
         //遍历棋盘
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                //如果是马，则bfs
+                //如果是马，则bfs 会将该马能到达的位置与reach做交集
                 if (chess[i][j] != '.') {
                     //马能跳的步数 char -> int
                     int k = chess[i][j] - '0';
@@ -77,13 +75,7 @@ public class Main {
 
         //记录所有马都可以到达的位置的最小步数和
         int minStep = Integer.MAX_VALUE;
-        //二维
-        //for (int[] pos : reach){
-        //    int x =  pos[0];
-        //    int y =  pos[1];
-        //    minStep = Math.min(minStep,stepChess[x][y]);
-        //}
-        //一维
+
         for (int pos : reach) {
             //x,y是所有马都可到达的位置
             int x = pos / n;
@@ -101,11 +93,10 @@ public class Main {
         //x,y是初始位置，需要0步
         queue.add(new int[]{x, y, 0});
 
-        //记录该马可以到达的位置
-        //HashSet<int[]> visit =  new HashSet<>();//二维
-        //visit.add(new int[]{x,y});
-
+        //记录该马能跳到的所有位置，最后与reach取交集
         HashSet<Integer> visit = new HashSet<>();//一维
+
+        //把起点加入
         visit.add(x * n + y);
 
         //k为该马剩余可走的步数
@@ -117,18 +108,18 @@ public class Main {
             for (int[] temp : queue) {
                 int preX = temp[0];
                 int preY = temp[1];
+                //step指马跳到上一个位置(preX,preY)需要的步数
                 int step = temp[2];
                 //遍历从该位置能走的点
                 for (int[] offset : offsets) {
                     int newX = preX + offset[0];
                     int newY = preY + offset[1];
 
-                    //int[] pos =  new int[]{newX,newY};
                     int pos = newX * n + newY;
                     //如果下标越界，或者已经访问过，则跳过
                     if (newX < 0 || newX >= m || newY < 0 || newY >= n || visit.contains(pos)) continue;
 
-                    //将新位置插入到newQueue
+                    //将新位置插入到newQueue 到达新位置需要的步数是上一步需要的步数+1
                     newQueue.add(new int[]{newX, newY, step + 1});
 
                     //该马到达该位置的最小步数为step+1，首次到达即最小才会记录，已经被访问过则不是最小
@@ -148,15 +139,4 @@ public class Main {
         //要么转一维数组 要么自定义方法
         reach.retainAll(visit);
     }
-
-    public static HashSet<int[]> retain(HashSet<int[]> reach, HashSet<int[]> visit) {
-        HashSet<int[]> result = new HashSet<>();
-        for (int[] tmp : reach) {
-            if (visit.contains(tmp)) {
-                result.add(tmp);
-            }
-        }
-        return result;
-    }
-
 }
