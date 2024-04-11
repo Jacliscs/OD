@@ -43,7 +43,7 @@ public class Main {
 
 
     //寻找一个字符串中满足预期瑕疵度的最长元音子串，返回最长元音子串的长度
-    public static int getMaxVowel(String s, long flaw) {
+    public static int getMaxVowel(String s, int flaw) {
         //如果长度为1
         if (s.length() == 1) {
             if (s.charAt(0) == 'a' || s.charAt(0) == 'e' || s.charAt(0) == 'i' || s.charAt(0) == 'o' || s.charAt(0) == 'u' && getFlaw(s) == flaw) {
