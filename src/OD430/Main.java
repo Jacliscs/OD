@@ -42,16 +42,10 @@ public class Main {
         int[] temp = Arrays.stream(sc.nextLine().split(",")).mapToInt(Integer::parseInt).toArray();
         m = temp[0];
         n = temp[1];
-        //m = sc.nextInt();
-        //n = sc.nextInt();
 
         //每一个消耗的油 0障碍物 -1加油站
         matrix = new int[m][n];
-        //for (int i = 0; i < m; i++){
-        //    for (int j = 0; j < n; j++){
-        //        matrix[i][j] = sc.nextInt();
-        //    }
-        //}
+
         for (int i = 0; i < m; i++) {
             matrix[i] = Arrays.stream(sc.nextLine().split(",")).mapToInt(Integer::parseInt).toArray();
         }
@@ -70,22 +64,22 @@ public class Main {
         LinkedList<Node> queue = new LinkedList<>();
 
         //起始位置
-        Node src = new Node(0, 0);
+        Node start = new Node(0, 0);
 
         if (matrix[0][0] == -1) {
             //如果起点就是加油站
-            src.init = 0;//到达该点不需要初始油量
-            src.remain = 100;//该点后续还剩100油量
-            src.flag = true;//发生过加油
+            start.init = 0;//到达该点不需要初始油量
+            start.remain = 100;//该点后续还剩100油量
+            start.flag = true;//发生过加油
         } else {
             //不是起点位置，那么起点的初始油量至少为matrix[0][0]
-            src.init = matrix[0][0];
-            src.remain = 0;
-            src.flag = false;
+            start.init = matrix[0][0];
+            start.remain = 0;
+            start.flag = false;
         }
 
         //添加到队列
-        queue.add(src);
+        queue.add(start);
 
         //dist_init[x][y] 用于记录起点 (0, 0) 到达 (x, y) 的所有可达路径中最优路径（即初始油量需求最少的路径）的初始油量
         int[][] dist_init = new int[m][n];
@@ -97,8 +91,8 @@ public class Main {
 
         //dist_remain记录从(0,0)点到(x,y)点时剩的油量
         int[][] dist_remain = new int[m][n];
-        dist_init[0][0] = src.init;
-        dist_remain[0][0] = src.remain;
+        dist_init[0][0] = start.init;
+        dist_remain[0][0] = start.remain;
 
 
         //广搜bfs
@@ -127,7 +121,7 @@ public class Main {
                     remain -= matrix[newX][newY];
                 }
 
-                //如果到达新位置后
+                //如果到达新位置后，剩余油量小于0，则考虑是否在起点加油
                 if (remain < 0) {
                     //如果已经加过油了都还不行，则不能通过在初始状态添的油用在这一步
                     if (flag) continue;
