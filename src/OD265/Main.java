@@ -35,7 +35,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         //预期瑕疵度
-        long n = Integer.parseInt(sc.nextLine());
+        int n = Integer.parseInt(sc.nextLine());
         //字符串
         String str = sc.nextLine();
         System.out.println(getMaxVowel(str, n));
@@ -43,8 +43,7 @@ public class Main {
 
 
     //寻找一个字符串中满足预期瑕疵度的最长元音子串，返回最长元音子串的长度
-    public static long getMaxVowel(String s, long flaw) {
-        long maxLen = 0;
+    public static int getMaxVowel(String s, long flaw) {
         //如果长度为1
         if (s.length() == 1) {
             if (s.charAt(0) == 'a' || s.charAt(0) == 'e' || s.charAt(0) == 'i' || s.charAt(0) == 'o' || s.charAt(0) == 'u' && getFlaw(s) == flaw) {
@@ -55,9 +54,9 @@ public class Main {
         }
         //双指针
         Pattern p = Pattern.compile("^[AEIOUaeiou].*[AEIOUaeiou]$");
-        for (long i = 0; i < s.length(); i++) {
-            for (long j = s.length(); j > i; j--) {
-                String temp = s.substring((int) i, (int) j);
+        for (int i = 0; i < s.length(); i++) {
+            for (int j = s.length(); j > i; j--) {
+                String temp = s.substring(i, j);
                 //一找到就返回，一定是最大长度
                 if (p.matcher(temp).find() && getFlaw(temp) == flaw) {
                     return temp.length();
@@ -65,9 +64,8 @@ public class Main {
             }
         }
         //没找到的话
-        return maxLen;
+        return 0;
     }
-
 
     //返回一个元音字符串中的瑕疵度
     public static long getFlaw(String s) {
