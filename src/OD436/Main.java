@@ -41,8 +41,8 @@ public class Main {
             String key = cmd[0];
             String val = cmd[1];
 
-            //申请命令
-            if (key.equals("REQUEST")) {
+            //申请命令 常量在前面防止空指针异常
+            if ("REQUEST".equals(key)) {
                 //需要分配的内存大小
                 int size = Integer.parseInt(val);
 
@@ -76,7 +76,7 @@ public class Main {
                         System.out.println(start);
                         break;
                     } else {
-                        //range与used.get(i)有交叉，则改变起始位置到used.get(i)的后一位
+                        //range与used.get(i)有交叉，则改变起始位置到used.get(i)结束位置的后一位
                         start = used.get(i)[1] + 1;
                     }
                 }
