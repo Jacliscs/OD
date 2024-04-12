@@ -51,7 +51,7 @@ public class Main {
         Arrays.sort(requirements);
         //最少人力至少是max，才能一个月完成该需求
         long min = requirements[n - 1];
-        //最多最大和第二大的需求和
+        //最多最大和第二大的需求和 因为一个月最多完成两个需求
         long max = requirements[n - 1] + requirements[n - 2];
         //记录结果 取最小的
         long ans = max;
