@@ -48,36 +48,35 @@ public class Main {
         //将接受到的数据用空格分隔，并转为整型数组
         int[] prices = Arrays.stream(sc.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
         int[] newPrices = getDiscount(prices);
-        for (int i: newPrices){
-            System.out.print(i + " ");
-        }
+        Arrays.stream(newPrices).forEach(price -> System.out.print(price + " "));
     }
 
     //返回享受一轮优惠后的寿司价格
     public static int[] getDiscount(int[] prices) {
         int[] newPrices = new int[prices.length];
+
+        //newPrices[i] = prices[i] + 第一个比自己少的prices
+        newPrices = Arrays.copyOfRange(prices, 0, prices.length);
+
         //每一个往后遍历，遇到第一个价格比自己低的，则+=
         for (int i = 0; i < prices.length; i++) {
-            newPrices[i] = prices[i];
-        }
-
-        for (int i = 0; i < prices.length; i++) {
-            int flag = 0;
+            //标记是否找到比自己价格低的
+            boolean flag = false;
             //先从i+1往后遍历
             for (int j = i + 1; j < prices.length; j++) {
                 //从i往后遍历，找到第一个比自己价格低的
-                if (prices[j] < prices[i] && flag==0) {
+                if (prices[j] < prices[i] && !flag) {
                     newPrices[i] += prices[j];
-                    flag = 1;
+                    flag = true;
                     break;
                 }
             }
             //如果往后遍历没找到，则从开头往i-1遍历
-            if (flag == 0) {
+            if (!flag) {
                 for (int k = 0; k < i; k++) {
                     if (prices[k] < prices[i]) {
                         newPrices[i] += prices[k];
-                        flag = 1;
+                        flag = true;
                         break;
                     }
                 }
