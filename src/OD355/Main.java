@@ -53,27 +53,5 @@ public class Main {
             index = -index - 1;
         }
         return index + 1;
-        //int left = 0;
-        //int right = arr.length - 1;
-        //int index = 0;
-        ////如果第一位大于n，则小明排第一个
-        //if (arr[0] > n) {
-        //    return 1;
-        //}
-        //
-        //while (right - left > 1) {
-        //    int mid = (left + right) / 2;
-        //    if (arr[mid] < n) {
-        //        left = mid;
-        //    } else if (arr[mid] > n) {
-        //        right = mid;
-        //    } else {
-        //        //arr[mid] = n
-        //        index = mid;
-        //    }
-        //}
-        ////最后n应该添加到left的左边或right的右边
-        //index = left + 2;
-        //return index;
     }
 }
