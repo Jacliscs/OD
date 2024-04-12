@@ -53,17 +53,14 @@ public class Main {
                 if (sb.isEmpty()){
                     continue;
                 }else {
+                    //删除最后一位
                     sb.deleteCharAt(sb.length() - 1);
                 }
             }
         }
         String newPassword = sb.toString();
+        //需要检测的长度、大小写、数字、符号
         int len = newPassword.length();
-        //判断是否合法
-        if (len < 8){
-            return newPassword + ",false";
-        }
-        //长度已经合法
         int upper = 0;
         int lower = 0;
         int num = 0;
@@ -81,7 +78,7 @@ public class Main {
                 other++;
             }
         }
-        if (upper >=1 && lower >= 1 && num >= 1 && other >= 1){
+        if (upper >= 1 && lower >= 1 && num >= 1 && other >= 1 && len >= 8) {
             return newPassword + ",true";
         }else {
             return newPassword + ",false";
