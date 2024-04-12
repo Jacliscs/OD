@@ -51,13 +51,9 @@ public class Main {
         LinkedList<Integer> list = new LinkedList<>();
         //添加到list
         Arrays.stream(nums).forEach(list::add);
-        //如果幸存数量大于nums.length
-        if (left >= list.size()) {
-            return Arrays.stream(nums).sum();
-        } else if (left == 0) {
-            return 0;
-        }
+
         int start = 1;
+        //如果幸存数量大于剩余数字，则不需要删除，否则需要删除
         while (list.size() > left) {
             //从0开始起跳 中间间隔jump个数字 第一个被移除的下标为jump+1
             //到末尾时回到o
@@ -67,11 +63,7 @@ public class Main {
             list.remove(start);
         }
 
-        int sum = list.stream().reduce(Integer::sum).orElse(0);
-        //int sum = 0;
-        //for (int i : list){
-        //    sum += i;
-        //}
-        return sum;
+        //返回幸存数之和
+        return list.stream().reduce(Integer::sum).orElse(0);
     }
 }
