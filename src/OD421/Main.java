@@ -64,15 +64,6 @@ public class Main {
             //将第r列的元素纳入子矩阵
             for (int i = 0; i < n; i++) {
                 int num = matrix[i][r];
-
-                //if (cnts[num] > 0){//如果是目标内的num，且当前对num的需求量大于0
-                //    cnts[num]--;//匹配到一个就减一个
-                //    total--;//总需求-1
-                //}else {
-                //    //就算不是目标num，也要减1，这样后续左边界l右移的时候，对非目标num++也不会让cnts[num]>0,
-                //    cnts[num]--;
-                //}
-
                 //如果num是需要的数字，此时cnts[num]一定>0 如cnts[1] = 2,变为cnts[1]=1,然后将total-1
                 //如果num不是需要的数字，初始cnts[num]=0,不满足cnts[num]>0，同时cnts[num]也要-1，便于后续移动左边界后，不会让cnts[num]>0最多=0
                 if (cnts[num]-- > 0) {
@@ -88,19 +79,9 @@ public class Main {
                 for (int i = 0; i < n; i++) {
                     int num = matrix[i][l];
                     //此时所有非目标num的cnts[num]都应该小于0
-                    if (cnts[num] >= 0) {
-                        //目标num
-                        cnts[num]++;
+                    if (cnts[num]++ >= 0) {
                         total++;
-                    } else {
-                        //非目标
-                        cnts[num]++;
                     }
-
-                    //如果移出的
-                    //if (cnts[num]++ >= 0){
-                    //    total++;
-                    //}
                 }
                 l++;
             }
