@@ -33,9 +33,7 @@ public class Main {
         int n = sc.nextInt();
         //存放结果
         ArrayList<String> result = getResult(n);
-        for (String s : result) {
-            System.out.println(s);
-        }
+        result.forEach(System.out::println);
     }
 
     public static ArrayList<String> getResult(int t) {
@@ -77,14 +75,12 @@ public class Main {
         }
         //排序 按长度升序
         ans.sort(Comparator.comparing(a -> a.length));
-        for (int[] one : ans) {
+        ans.forEach(a -> {
             StringJoiner sj = new StringJoiner("+", t + "=", "");//前缀是n= 连接符是+ 后置是""
-            for (int i : one) {
-                sj.add(i + "");//10=1+2+3+4
-            }
+            Arrays.stream(a).forEach(i -> sj.add(i + ""));
             result.add(sj.toString());
-        }
-        //最后添加一行
+        });
+
         result.add("Result:" + ans.size());
         return result;
     }
