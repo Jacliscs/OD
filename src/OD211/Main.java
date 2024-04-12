@@ -52,7 +52,9 @@ public class Main {
         while (left < n) {
             //右指针往右移动，找第一个比自己高的
             if (right >= n) {
+                //如果nums[i]没有找到比自己高的，记为0
                 sj.add("0");
+                //移动到下一个人，且右指针恢复
                 left++;
                 right = left + 1;
                 continue;
