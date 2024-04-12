@@ -62,9 +62,11 @@ public class Main {
         }
         //存放结果
         int[][] res = merge(meets);
-        for (int[] time : res) {
-            System.out.println(time[0] + " " + time[1]);
-        }
+
+        Arrays.stream(res).forEach(time -> System.out.println(time[0] + " " + time[1]));
+        //for (int[] time : res) {
+        //    System.out.println(time[0] + " " + time[1]);
+        //}
     }
 
     //输出会议室占用时间，重复的合并
