@@ -75,6 +75,7 @@ public class Main {
         //遍历每一个起点
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
+                //把除了障碍物之外的都连通
                 if (matrix[i][j] != 1) {
                     //如果不是障碍物，转为一维坐标pos
                     int pos = i * cols + j;
