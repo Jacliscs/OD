@@ -66,7 +66,7 @@ public class Main {
             Node r_child = pq.poll();
             //合并两个节点 父节点权重是两个子节点权重和
             int fa_weight = l_child.weight + r_child.weight;
-            //父节点子树的高度 比子节点最大高度+1
+            //父节点子树的高度 比子节点子树最大高度+1
             int fa_height = Math.max(l_child.height, r_child.height) + 1;
 
             //合并的父节点加入优先队列
