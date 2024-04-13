@@ -35,10 +35,10 @@ public class Main {
             midIndexMap.get(num).add(i);
         }
 
-        //根据中序、前序的还原树
+        //根据中序、前序的还原求和树
         TreeNode root = buildTree(0, n - 1, 0, n - 1);
 
-        //记录还原后的数
+        //记录还原后的求和树
         StringJoiner sj = new StringJoiner(" ");
         getMidOrder(root, sj);
         System.out.println(sj);
@@ -89,7 +89,7 @@ public class Main {
         //子序列下标越界
         if (preL > preR) return null;
 
-        //根据前序遍历找到当前子树的根
+        //根据前序遍历找到当前子树的根 前序遍历的左边界就是根：根 左 右
         int rootNum = preOrder[preL];
         TreeNode root = new TreeNode(rootNum);
 
@@ -102,7 +102,7 @@ public class Main {
 
             //如果中序遍历中当前根左边的左子树，和前序遍历中的左子树不同，则非法
             int leftLen = idx - midL;//左子树长度  左 根 右
-            //preL是根，左子树下标要+1
+            //preL是根，前序遍历左子树下标要+1
             if (notEquals(midL, preL + 1, leftLen)) continue;
 
             //如果中序遍历中的右子树跟前序遍历的右子树不同，则说明idx位置不正确
@@ -149,7 +149,9 @@ public class Main {
 
     //树
     static class TreeNode {
+        //当前节点值
         int num;
+        //当前节点的左右子树和
         int childSum;
         TreeNode leftChild;
         TreeNode rightChild;
