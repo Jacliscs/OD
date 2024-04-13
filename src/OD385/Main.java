@@ -48,7 +48,6 @@ public class Main {
             levels[i] = sc.nextInt();
         }
         //按序号，职级是升序或者降序才能组队，可以参加多个组队，暴力枚举
-        //System.out.println(getResult(levels));
         System.out.println(solution(levels));
     }
 
@@ -92,48 +91,4 @@ public class Main {
         }
         return count;
     }
-
-
-    /**
-     * 三重循环求可以组队的数量，可能会超时
-     *
-     * @param levels
-     * @return int
-     * @create 2024/3/25 17:23
-     */
-    public static int getResult(int[] levels) {
-        //每三个职级是升序或者降序的可以组队，一个人可以参加多个队
-        int count = 0;
-        for (int i = 0; i < levels.length - 2; i++) {
-            for (int j = i + 1; j < levels.length - 1; j++) {
-                for (int k = j + 1; k < levels.length; k++) {
-                    if (check(levels[i], levels[j], levels[k])) {
-                        count++;
-                    }
-                }
-            }
-        }
-        return count;
-    }
-
-    /**
-     * 判断当前三个值是否是升序排列或者降序排列
-     *
-     * @param i
-     * @param j
-     * @param k
-     * @return boolean
-     * @create 2024/3/25 17:24
-     */
-    public static boolean check(int i, int j, int k) {
-        if (i < j && j < k) {
-            return true;
-        }
-        if (i > j && j > k) {
-            return true;
-        }
-        return false;
-    }
-
-
 }
