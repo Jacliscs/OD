@@ -62,9 +62,10 @@ public class Main {
         //将所有感染者的接触群体的人数统计
         int ans = 0;
         for (int i : confirmed) {
+            //感染源是i的根节点，所有跟i有接触或者间接接触的根都是fa cnts[fa]则是这条感染链的接触人数
             int fa = ufs.find(i);
 
-            //如果已统计过，则跳过
+            //则跳过
             if (confirmed_fa.contains(fa)) continue;
 
             //添加到统计列表
