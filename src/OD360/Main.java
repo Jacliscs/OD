@@ -65,25 +65,25 @@ public class Main {
 
         //add方法
         public void add(int val) {
-            TreeNode temp = new TreeNode(val);
+            TreeNode node = new TreeNode(val);
             //如果没有根节点
             if (this.root == null) {
-                temp.height = 1;//根节点高度为1
-                this.root = temp;//temp定为root节点
+                node.height = 1;//根节点高度为1
+                this.root = node;//temp定为root节点
                 this.tree_height = 1;//目前数的高度为1
             } else {
                 //已存在根节点，则用temp从根节点去逐层比较
                 TreeNode cur = this.root;
                 while (true) {
                     //假设temp是当前cur节点的子节点
-                    temp.height = cur.height + 1;
+                    node.height = cur.height + 1;
                     //更新树的高度
-                    this.tree_height = Math.max(this.tree_height, temp.height);
+                    this.tree_height = Math.max(this.tree_height, node.height);
                     //如果小于当前节点的数-500，则插入到cur的左子树
                     if (val < cur.val - 500) {
                         //如果没有左子树，则新建左子树，如果有，则更新cur=cur.left
                         if (cur.left == null) {
-                            cur.left = temp;
+                            cur.left = node;
                             //插入后就跳出
                             break;
                         } else {
@@ -93,7 +93,7 @@ public class Main {
                     } else if (val > cur.val + 500) {
                         //插入右子树
                         if (cur.right == null) {
-                            cur.right = temp;
+                            cur.right = node;
                             break;
                         } else {
                             cur = cur.right;
@@ -101,7 +101,7 @@ public class Main {
                     } else {
                         //插入中子树
                         if (cur.mid == null) {
-                            cur.mid = temp;
+                            cur.mid = node;
                             break;
                         } else {
                             cur = cur.mid;
