@@ -70,23 +70,23 @@ public class Main {
         ans.add(rootEle);
 
         //中序遍历中找到根的位置：左 根 右
+        //根的索引=左子树长度
         int rootIdx = mid.indexOf(rootEle);
         //左子树长度 根左边就是左子树的长度
-        int left_len = rootIdx;
 
         //如果存在左子树
-        if (left_len > 0) {
+        if (rootIdx > 0) {
             //从后续遍历中，截取出左子树的后序遍历
-            String left_post = post.substring(0, left_len);
+            String left_post = post.substring(0, rootIdx);
             //从中序遍历中，截取出左子树的中序遍历
             String left_mid = mid.substring(0, rootIdx);
             //将左子树的后序、中序遍历加入执行队列
             queue.add(new String[]{left_post, left_mid});
         }
         //如果存在右子树
-        if (post.length() - 1 - left_len > 0) {
+        if (post.length() - 1 - rootIdx > 0) {
             //从后续遍历中，截取出右子树的后序遍历
-            String right_post = post.substring(left_len, post.length() - 1);
+            String right_post = post.substring(rootIdx, post.length() - 1);
             //从中序遍历中，截取出右子树的中序遍历
             String right_mid = mid.substring(rootIdx + 1);
             //将右子树的后序、中序遍历加入执行队列
