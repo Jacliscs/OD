@@ -21,7 +21,8 @@ public class Main {
         Tree tree = new Tree();
 
         //记录最后一条命令的输出 除了pwd有输出，其他都输出空
-        String command_output = "";
+        //输出为空时要输出根目录"/" 才能百分百解法
+        String command_output = "/";
 
         outer:
         while (sc.hasNextLine()) {
@@ -33,13 +34,13 @@ public class Main {
             String cmd_key = tmp[0];
             //参数
             //String cmd_val =  tmp[1];//pwd没有参数，可能会越界
-
-            if (cmd_key.equals("pwd")) {
+            //常量在前面，防止空指针异常
+            if ("pwd".equals(cmd_key)) {
                 //pwd不需要参数，有参数的错误输入什么都不需要干
                 if (tmp.length != 1) continue;
                 //否则，就将当前命令的输出结果保存
                 command_output = tree.pwd();
-            } else if (cmd_key.equals("mkdir") || cmd_key.equals("cd")) {
+            } else if ("mkdir".equals(cmd_key) || "cd".equals(cmd_key)) {
                 //参数只能有1个
                 if (tmp.length != 2) continue;
 
@@ -56,17 +57,15 @@ public class Main {
                 }
 
                 //实现操作
-                if (cmd_key.equals("mkdir")) {
+                if ("mkdir".equals(cmd_key)) {
                     tree.mkdir(cmd_val);
-
                     //mkdir操作没有输出，清空当前保存的最后输出
-                    command_output = "";
+                    command_output = "/";
                 } else {
                     //cd
                     tree.cd(cmd_val);
-
                     //清空
-                    command_output = "";
+                    command_output = "/";
                 }
             }
         }
@@ -76,11 +75,14 @@ public class Main {
 
     //节点 包含父目录 子目录<>
     static class TreeNode {
+        //目录名
         String curDicName;
-        TreeNode fa;//父目录
-        HashMap<String, TreeNode> ch;//子目录可能有多个
+        //父目录
+        TreeNode fa;
+        //子目录：<子目录名，子目录对象>
+        HashMap<String, TreeNode> ch;
 
-        //构造方法
+        //构造方法 新建一个节点<节点名，父目录>
         public TreeNode(String curDicName, TreeNode fa) {
             this.curDicName = curDicName;
             this.fa = fa;
@@ -105,14 +107,14 @@ public class Main {
         //新建目录
         public void mkdir(String dicName) {
             //如果有同名子目录，则不做任务操作
-            //文件名 父目录
+            //子目录名，子目录对象(名称+"/",该子目录的父目录)
             this.cur.ch.putIfAbsent(dicName, new TreeNode(dicName + "/", this.cur));
         }
 
         //进入目录
         public void cd(String dicName) {
-            //cd ..
-            if (dicName.equals("..")) {
+            //cd .. 防止空指针异常
+            if ("..".equals(dicName)) {
                 //如果上层不为空，则进入上层
                 if (this.cur.fa != null) {
                     this.cur = this.cur.fa;
@@ -136,6 +138,7 @@ public class Main {
             //从当前层遍历到root，每次插入到头部，即倒序
             TreeNode cur = this.cur;
             while (cur != null) {
+                // c/ -> b/c/ -> a/b/c/ -> /a/b/c/
                 sb.insert(0, cur.curDicName);
                 cur = cur.fa;
             }
