@@ -44,7 +44,7 @@ public class Main {
         dist[src] = 0;
 
         //优先队列，已经被探索到的点中耗时越小的越优先
-        PriorityQueue<Integer> needCheck = new PriorityQueue<>((a, b) -> dist[a] - dist[b]);
+        PriorityQueue<Integer> needCheck = new PriorityQueue<>(Comparator.comparingInt(a -> dist[a]));
         //记录点是否被探索过
         boolean[] visited = new boolean[n + 1];
 
@@ -55,6 +55,7 @@ public class Main {
         while (needCheck.size() > 0) {
             //取出当前探索的点需要耗时最少的
             int cur = needCheck.poll();
+            //取出了就要修改状态
             visited[cur] = false;
 
             //如果cur有能到达的其他点
@@ -86,6 +87,8 @@ public class Main {
         for (int i = 1; i <= n; i++) {
             ans = Math.max(ans, dist[i]);
         }
+        //不能直接用stream.max() 因为dist[0]一直是无穷大
+        //int max = Arrays.stream(dist).max().orElse(0);
 
         //如果有无法感染的电脑，则源点到该电脑的dist是无穷大
         System.out.println(ans == Integer.MAX_VALUE ? -1 : ans);
