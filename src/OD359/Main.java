@@ -74,7 +74,7 @@ public class Main {
                 value += score;
                 curTime++;
             } else {
-                //当endTime>=curTime时，用list总最小值与当前score比较，放入较大值
+                //当curTime >= endTime时，用list总最小值与当前score比较，放入较大值
                 //总是能存放最大的几个值
                 list.sort((a, b) -> a - b);
                 int min_score = list.get(0);
