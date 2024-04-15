@@ -1,6 +1,7 @@
 package OD376;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Scanner;
 
 /**
@@ -16,7 +17,7 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        //基站数量 节点数 [1,n]
+        //基站数量 节点下标 [1,n]
         int n = sc.nextInt();
 
         //基站连接数量
@@ -29,6 +30,7 @@ public class Main {
             int weight = sc.nextInt();
             int flag = sc.nextInt();//1表示已经相连，边权重视为0
 
+            //如果已经直连，则两点之间的成本就为0
             edges[i] = new Edge(from, to, flag == 1 ? 0 : weight);
         }
         //输出结果
@@ -40,7 +42,7 @@ public class Main {
         int minWeight = 0;
 
         //按照权重升序排列
-        Arrays.sort(edges, (a, b) -> a.weight - b.weight);
+        Arrays.sort(edges, Comparator.comparingInt(a -> a.weight));
 
         //并查集 序号从1开始 [1,n+1]
         UnionFindSet ufs = new UnionFindSet(n + 1);
@@ -63,6 +65,9 @@ public class Main {
         return -1;
     }
 
+    /**
+     * 边连接类
+     */
     static class Edge {
         //边起点
         int from;
