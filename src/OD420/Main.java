@@ -42,7 +42,7 @@ public class Main {
         }
 
         //二分法 枚举第k大的值
-        //假如第k大的值是kth，则有k-1个数比kth大，有n-(k-1)个数比kth小
+        //假如第k大的值是kth，则有k-1个数比kth大，有n-(k-1)个数比kth小于等于kth
         //使用min max来逼近kth，找到刚好的kth
         while (min <= max) {
             int mid = (min + max) / 2;
@@ -86,9 +86,8 @@ public class Main {
                 smallerCount++;
             }
         }
-        //是否找到n-k+1个数比kth小
+        //是否找到n-k+1个数比kth小 找到则返回true
         return smallerCount >= n - k + 1;
-
 
     }
 
