@@ -1,7 +1,6 @@
 package OD432;
 
 import java.util.*;
-import java.util.concurrent.CountDownLatch;
 
 /**
  * @author 浮生
@@ -14,7 +13,6 @@ import java.util.concurrent.CountDownLatch;
 // 注意类名必须为 Main, 不要有任何 package xxx 信息
 public class Main {
 
-    private static int n;
     private static HashMap<Integer, Integer> inDegree;
     private static HashMap<Integer, ArrayList<Integer>> next;
     private static HashSet<Integer> set;
@@ -22,9 +20,10 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         //有几个键值对
-        n = sc.nextInt();
+        int n = sc.nextInt();
 
         //存放节点的入度，当入度为0时，需要剥离
+        //首节点只有一个
         inDegree = new HashMap<>();
 
         //每个节点的后继节点
@@ -45,6 +44,9 @@ public class Main {
 
             //后驱节点的入度+1
             inDegree.put(next_node, inDegree.getOrDefault(next_node, 0) + 1);
+            //前驱节点入度不变，如果是首节点则一直为0
+            inDegree.put(pre_node, inDegree.getOrDefault(pre_node, 0));
+
 
             //把后继节点加入前驱结点的后继集合
             next.putIfAbsent(pre_node, new ArrayList<>());
@@ -58,7 +60,6 @@ public class Main {
     /**
      * 返回头结点和尾节点，如果是环则返回-1
      *
-     * @param
      * @return java.lang.String
      * @create 2024/4/1 19:28
      */
@@ -73,8 +74,8 @@ public class Main {
         LinkedList<Integer> queue = new LinkedList<>();
         //遍历所有节点
         for (int p : set) {
-            //头结点没有入度，不在inDegree中
-            if (!inDegree.containsKey(p)) {
+            //头结点入度为0，有且只有一个
+            if (inDegree.get(p) == 0) {
                 //找到了头结点
                 head = p;
                 queue.add(p);
@@ -90,7 +91,7 @@ public class Main {
         int count = 0;
 
         //count记录已被剥离的节点个数
-        while (queue.size() > 0) {
+        while (!queue.isEmpty()) {
             //剥离入度为0的点
             int fa = queue.removeFirst();
             //个数加1
@@ -119,7 +120,7 @@ public class Main {
         } else {
             sj.add(head + "");
             //尾节点升序排列加入结果
-            tails.stream().sorted((a, b) -> a - b).forEach(p -> sj.add(p + ""));
+            tails.stream().sorted(Comparator.comparingInt(a -> a)).forEach(p -> sj.add(p + ""));
         }
         return sj.toString();
     }
