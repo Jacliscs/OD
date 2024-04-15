@@ -94,8 +94,11 @@ public class Main {
      * @create 2024/4/1 20:07
      */
     public static void floyd() {
+        //第一层是中转点
         for (int k = 0; k < n + 1; k++) {
+            //第二层是起始点
             for (int i = 0; i < n + 1; i++) {
+                //第三层是终点
                 for (int j = 0; j < n + 1; j++) {
                     //比较原始i->j 的距离 和i->k->j的距离
                     int new_dist = dist[i][k] + dist[k][j];
