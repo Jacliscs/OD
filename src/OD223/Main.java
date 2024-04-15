@@ -50,23 +50,14 @@ public class Main {
         for (int i = 1; i <= len; i++) {
             preSum[i] = preSum[i - 1] + nums[i - 1];
         }
-        //方法一：双重for循环
-        //for (int i=0;i<len;i++){
-        //    for (int j=i+1;j<=len;j++){
-        //        long sum = preSum[j]-preSum[i];
-        //        if (sum>=x){
-        //            //如果此时[i,j]的和大于sum，则后续大于j小于等于len的都会大于sum
-        //            count += len-j+1;
-        //            break;
-        //        }
-        //    }
-        //}
-        //方法二：while循环
+
+        //while循环
         int l = 0;
         int r = 1;
         while (r <= len) {
             long sum = preSum[r] - preSum[l];
             if (sum >= x) {
+                //[l,r]区间的和已经大于x了，则[l,r,....len-1]区间的和必定大于x （都是正整数）
                 count += len - r + 1;
                 //窗口滑动
                 l++;
