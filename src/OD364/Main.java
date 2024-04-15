@@ -45,7 +45,7 @@ public class Main {
 
         //优先队列，已经被探索到的点中耗时越小的越优先
         PriorityQueue<Integer> needCheck = new PriorityQueue<>(Comparator.comparingInt(a -> dist[a]));
-        //记录点是否被探索过
+        //记录点是否在队列中
         boolean[] visited = new boolean[n + 1];
 
         //初始时探索的点只有源点
