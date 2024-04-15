@@ -44,7 +44,7 @@ public class Main {
 
         //从长度2开始切割 比较
         for (int i = 2; i <= length; i++) {
-            //遍历从1到i 看是否有更大收益的组合
+            //遍历从1到i 看是否有更大收益的组合 将i长度的木头切割为i-j和j
             for (int j = 1; j < i; j++) {
                 int new_price = dp[j].price * dp[i - j].price;
 
@@ -64,9 +64,10 @@ public class Main {
         dp[length].slice.sort((a, b) -> a - b);
         //储存结果
         StringJoiner sj = new StringJoiner(" ");
-        for (int i : dp[length].slice) {
-            sj.add(i + "");
-        }
+        dp[length].slice.forEach(s -> sj.add(s + ""));
+        //for (int i : dp[length].slice) {
+        //    sj.add(i + "");
+        //}
         return sj.toString();
     }
 
