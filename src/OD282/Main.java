@@ -74,12 +74,13 @@ public class Main {
             return "NULL";
         }
         //按开始下标升序排序
-        list.sort((a, b) -> a[0] - b[0]);
+        list.sort(Comparator.comparingInt(a -> a[0]));
         //添加进结果
         StringJoiner sj = new StringJoiner(" ");
-        for (int[] temp : list) {
-            sj.add(temp[0] + "-" + temp[1]);
-        }
+        list.forEach(t -> sj.add(t[0] + "-" + t[1]));
+        //for (int[] temp : list) {
+        //    sj.add(temp[0] + "-" + temp[1]);
+        //}
         return sj.toString();
     }
 
