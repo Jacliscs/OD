@@ -71,6 +71,7 @@ public class Main {
         for (int i = 1; i <= max_num_a; i++) {
             //如果剩下的能整除wb，则可能是一个组合
             if ((wt - wa * i) % wb == 0) {
+                //货物b的数量
                 int j = (wt - wa * i) / wb;
                 max_profit = Math.max(max_profit, i * pa + j * pb);
             }
