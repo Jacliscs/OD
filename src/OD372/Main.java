@@ -65,7 +65,7 @@ public class Main {
             if (risks[i] > x) {
                 continue;
             }
-            //如果当前产品风险小于最大风险
+            //如果投资单件产品最优
             if (risks[i] <= x) {
                 //产品i的投资额
                 int invest_i = Math.min(invests[i], n);
@@ -135,7 +135,7 @@ public class Main {
         for (int k = 0; k < m; k++) {
             //如果id在select中，则添加对应的投资额
             if (select.containsKey(k)) {
-                sj.add(String.valueOf(select.get(k)));
+                sj.add(select.get(k) + "");
             } else {
                 sj.add("0");
             }
