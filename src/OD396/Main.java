@@ -1,5 +1,6 @@
 package OD396;
 
+import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 import java.util.StringJoiner;
@@ -55,10 +56,10 @@ public class Main {
         //把缓存中文件名字升序排序
         StringJoiner sj = new StringJoiner(",");
 
-        myFileSystem.files.stream().sorted(((o1, o2) -> o1.name.compareTo(o2.name))).forEach(file -> sj.add(file.name));
+        myFileSystem.files.stream().sorted((Comparator.comparing(o -> o.name))).forEach(file -> sj.add(file.name));
 
         //输出
-        System.out.println(sj.toString());
+        System.out.println(sj);
 
     }
 
