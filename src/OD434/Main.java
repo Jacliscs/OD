@@ -68,7 +68,7 @@ public class Main {
                 map.get(status).add(i);
             }
 
-            while (map.get(status).size() > 0) {
+            while (!map.get(status).isEmpty()) {
                 //状态status最早出现的位置
                 int earliest = map.get(status).getFirst();
 
