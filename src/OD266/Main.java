@@ -67,7 +67,8 @@ public class Main {
         for (int i = 0; i < records.length; i++) {
             //如果大于7了，要移出左边那个窗口，只影响present数量
             if (i >= 7) {
-                if (records[i - 7].equals("present")) {
+                //防止空指针异常：常量放前面
+                if ("present".equals(records[i - 7])) {
                     present--;
                 }
             }
@@ -86,7 +87,7 @@ public class Main {
                 case "late":
                 case "leaveearly":
                     //如果上一个也是迟到早退，则返回false
-                    if (lastRecord.equals("leaveearly") || lastRecord.equals("late")) {
+                    if ("leaveearly".equals(lastRecord) || "late".equals(lastRecord)) {
                         return false;
                     }
                     break;
