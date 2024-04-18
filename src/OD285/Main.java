@@ -42,6 +42,7 @@ public class Main {
         }
         StringJoiner sj = new StringJoiner(",");
         //根据value值降序排序
+        //s为indexMap中的每个值，排序后添加到sj中
         indexMap.keySet().stream().sorted((o1, o2) -> {
             //出现次数
             int o1Count = map.get(o1);
@@ -53,10 +54,7 @@ public class Main {
                 //如果相等，则按出现顺序排列
                 return indexMap.get(o1) - indexMap.get(o2);
             }
-        }).forEach(s -> {
-            //s为indexMap中的每个值，排序后添加到sj中
-            sj.add(s);
-        });
+        }).forEach(sj::add);
 
         return sj.toString();
     }
