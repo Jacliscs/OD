@@ -46,16 +46,14 @@ public class Main {
             return -1;
         }
         //数字范围为0-1000
+        Set<Integer> set = new HashSet<>();
         for (int num : arr) {
             if (num < 0 || num > 1000) {
                 return -1;
             }
-        }
-        //对数组进行去重
-        Set<Integer> set = new HashSet<>();
-        for (int num : arr) {
             set.add(num);
         }
+
         //去重后如果set的大小小于2n，则一定会重叠
         if (set.size() < 2 * n) {
             return -1;
@@ -63,37 +61,19 @@ public class Main {
         //排序set中的数
         List<Integer> list = new ArrayList<>(set);
         Collections.sort(list);
-        //存放最小n个数
-        int minSum = 0;
-        int maxSum = 0;
-        List<Integer> min = new ArrayList<>();
-        int i = 0;
-        while (min.size() < n) {
-            //不能有重复的
-            if (!min.contains(list.get(i))) {
-                min.add(list.get(i));
-                minSum += list.get(i);
-            }
-            i++;
+        //最大最小n个数的和
+        int ans = 0;
+        //左指针
+        int l = 0;
+        //右指针
+        int r = list.size() - 1;
+        while (n > 0) {
+            ans += list.get(l) + list.get(r);
+            l++;
+            r--;
+            n--;
         }
 
-        //存放最大n个数
-        List<Integer> max = new ArrayList<>();
-        int j = list.size() - 1;
-        while (max.size() < n) {
-            if (!max.contains(list.get(j))) {
-                max.add(list.get(j));
-                maxSum += list.get(j);
-            }
-            j--;
-        }
-
-        //判断两个list是否有重叠
-        for (int num : min) {
-            if (max.contains(num)) {
-                return -1;
-            }
-        }
-        return minSum + maxSum;
+        return ans;
     }
 }
