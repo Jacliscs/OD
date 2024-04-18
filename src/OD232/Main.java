@@ -51,25 +51,19 @@ public class Main {
     public static String match(String pre, String str) {
         //把单词用非字母分隔开
         String[] words = str.split("[^a-zA-Z]");
-        int n = words.length;
-        List<String> sj = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            if (words[i].startsWith(pre)) {
-                sj.add(words[i]);
+        //存放前缀匹配成功的单词 防重复，TreeSet自动升序
+        TreeSet<String> list = new TreeSet<>();
+        for (String word : words) {
+            if (word.startsWith(pre)) {
+                list.add(word);
             }
         }
-        if (sj.isEmpty()) {
+        if (list.isEmpty()) {
             return pre;
         } else {
-            //按字典排序
-            sj.sort(String::compareTo);
             StringJoiner result = new StringJoiner(" ");
-            for (String s1 : sj) {
-                //不能有重复的
-                if (!result.toString().contains(s1)) {
-                    result.add(s1);
-                }
-            }
+            //按字典排序
+            list.forEach(result::add);
             return result.toString();
         }
     }
