@@ -52,7 +52,7 @@ public class Main {
         ArrayList<int[]> ans = new ArrayList<>();
         //当左指针到达数组末尾，结束循环
         while (left < t) {
-            //如果小于n，则右指针移动
+            //如果小于n，则左指针移动
             if (sum > t) {
                 sum -= arr[left++];
             } else if (sum == t) {
