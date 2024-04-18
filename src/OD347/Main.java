@@ -37,6 +37,7 @@ public class Main {
         int n = nums.length;
 
         //序号 -> 组号的对应关系
+
         int[] group = new int[n + 1];
         for (int i = 0; i < n; i++) {
             int num = sc.nextInt();
