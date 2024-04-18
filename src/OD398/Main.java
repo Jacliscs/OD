@@ -24,8 +24,10 @@ public class Main {
         //n行n列
         n = Integer.parseInt(sc.nextLine());
 
+        //初始确诊病例编号
         confirmed = Arrays.stream(sc.nextLine().split(",")).mapToInt(Integer::parseInt).toArray();
 
+        //人员接触matrix[i][j]==1 表示编号i与编号j有接触 对角线对称
         matrix = new int[n][n];
         for (int i = 0; i < n; i++) {
             matrix[i] = Arrays.stream(sc.nextLine().split(",")).mapToInt(Integer::parseInt).toArray();
