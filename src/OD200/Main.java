@@ -2,6 +2,7 @@ package OD200;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Scanner;
 
 /**
@@ -29,9 +30,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         String[] str = sc.nextLine().split(",");
         //按照最后一位升序排列
-        Arrays.sort(str, (o1, o2) -> {
-            return o1.charAt(o1.length() - 1) - o2.charAt(o2.length() - 1);
-        });
+        Arrays.sort(str, Comparator.comparingInt(o -> o.charAt(o.length() - 1)));
         String result = String.join(",", str);
         System.out.println(result);
     }
