@@ -8,7 +8,7 @@ import java.util.*;
  * @date 2024/4/7
  * @level 中等
  * @score
- * @url https://leetcode.cn/problems/3sum/description/
+ * @url <a href="https://leetcode.cn/problems/3sum/description/">...</a>
  */
 // 注意类名必须为 Main, 不要有任何 package xxx 信息
 public class Main {
