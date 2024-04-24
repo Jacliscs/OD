@@ -18,7 +18,7 @@ public class Main2 {
     }
 }
 
-class Solution {
+class Solution2 {
     /**
      * 位运算表示每个单词中字母出现的情况
      *
