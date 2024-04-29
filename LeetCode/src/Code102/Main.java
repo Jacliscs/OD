@@ -74,22 +74,18 @@ class Solution {
         while (!queue.isEmpty()) {
             //存放这一层的层序遍历
             List<Integer> level = new ArrayList<>();
-            //每一层的大小都会变
-            int curSize = queue.size();
-
-            for (int i = 0; i < curSize; i++) {
-                TreeNode node = queue.poll();
+            //存放下一层的节点
+            Queue<TreeNode> nextLevel = new LinkedList<>();
+            for (TreeNode node : queue) {
                 level.add(node.val);
-                //把node的左右子树添加进末尾
-                if (node.left != null) {
-                    queue.offer(node.left);
-                }
-                if (node.right != null) {
-                    queue.offer(node.right);
-                }
+                //顺序添加：左、右子树
+                if (node.left != null) nextLevel.offer(node.left);
+                if (node.right != null) nextLevel.offer(node.right);
             }
             //把level层的层序遍历结果添加到ans中
             ans.add(level);
+            //更新层
+            queue = nextLevel;
         }
         return ans;
     }
