@@ -1,5 +1,7 @@
 package Code114;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -45,6 +47,53 @@ class Solution {
      * @return void
      */
     public void flatten(TreeNode root) {
+        //法一：先找到先序遍历列表，再依次修改
+        List<TreeNode> list = new ArrayList<>();
+        preOrder(root, list);
+
+        int size = list.size();
+
+        //把先序遍历里的后一个加到前一个的右子树，前一个的左子树为null
+        for (int i = 1; i < size; i++) {
+            TreeNode pre = list.get(i - 1);
+            TreeNode cur = list.get(i);
+
+            //把pre的左节点置为null，右子树链接cur
+            pre.left = null;
+            pre.right = cur;
+        }
+        //法二：原地拼接
+        //method(root);
+    }
+
+    /**
+     * 先序遍历
+     *
+     * @param root
+     * @param list
+     * @return void
+     */
+    public static void preOrder(TreeNode root, List<TreeNode> list) {
+        if (root != null) {
+            //优先添加根
+            list.add(root);
+
+            //左子树
+            preOrder(root.left, list);
+
+            //右子树
+            preOrder(root.right, list);
+        }
+    }
+
+
+    /**
+     * 原地拼接，将root按先序遍历顺序修改
+     *
+     * @param root
+     * @return void
+     */
+    private static void method(TreeNode root) {
         while (root != null) {
             //没有左子树，则考虑下一个节点
             if (root.left == null) {
