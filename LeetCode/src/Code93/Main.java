@@ -23,20 +23,15 @@ public class Main {
 
 class Solution {
     //记录结果
-    public static List<String> ans;
+    List<String> ans = new ArrayList<>();
     //路径
-    public static List<String> path;
+    List<String> path = new ArrayList<>();
 
     public List<String> restoreIpAddresses(String s) {
         //题解
-        ans = new ArrayList<>();
-
         int length = s.length();
 
         if (length > 12 || length < 4) return ans;
-
-        //暂存路径
-        path = new ArrayList<>();
 
         dfs(s, 0);
 
@@ -51,7 +46,7 @@ class Solution {
      * @param index
      * @return void
      */
-    public static void dfs(String s, int index) {
+    public void dfs(String s, int index) {
         //返回标志:遍历到s最后一个字符且有4段
         if (index == s.length() && path.size() == 4) {
             ans.add(String.join(".", path));
@@ -61,7 +56,7 @@ class Solution {
         //每段只能有1-3位
         for (int i = index; i < Math.min(s.length(), index + 3); i++) {
             //剪枝1：如果加起来凑不到4段了
-            if (path.size() + (s.length()) - index < 4) break;
+            if (path.size() + (s.length() - index) < 4) break;
 
             //剪枝2：如果已经满了4段，但是没有遍历完s
             if (path.size() == 4 && index != s.length()) break;
@@ -92,10 +87,10 @@ class Solution {
      * @param ip
      * @return boolean
      */
-    public static boolean isValid(String ip) {
+    public boolean isValid(String ip) {
         int ip_num = Integer.parseInt(ip);
 
         //要么是单独0，要么没有前导0且在0-255之间
-        return ip.equals("0") || (ip.charAt(0) != '0' && ip_num >= 0 && ip_num <= 255);
+        return "0".equals(ip) || (ip.charAt(0) != '0' && ip_num >= 0 && ip_num <= 255);
     }
 }
